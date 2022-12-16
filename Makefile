@@ -1,14 +1,53 @@
-TARGET = 
+TARGET = poule-poule.out
+MAIN = main
+JOUEUR = Joueur
+CARTE = Carte
+MAITREPOULEPOULE = MaitrePoulePoule
+COQ = Coq
+OEUF = Oeuf
+POULE = Poule
+RENARD = Renard
+IHM = IHM
+
 SOURCES := $(wildcard *.cpp)
 HEADERS := $(wildcard *.h)
 
 CFLAGS = -std=c++11 -Wall -I.
-CXX = g++ $(CFLAGS) -c 
-LD = g++
+CXX = g++ $(CFLAGS) -c
+LD = g++ -o
 RM = rm -f
 
-# TODO
+all: $(TARGET)
 
+$(TARGET): $(MAIN).o $(JOUEUR).o $(CARTE).o $(MAITREPOULEPOULE).o $(COQ).o $(OEUF).o $(POULE).o $(RENARD).o $(IHM).o
+	$(LD) $@ $(LDFLAGS) $^
+
+$(MAIN).o: $(MAIN).cpp
+	$(CXX) $(CFLAGS) $^
+
+$(JOUEUR).o: $(JOUEUR).cpp
+	$(CXX) $(CFLAGS) $^
+
+$(CARTE).o: $(CARTE).cpp
+	$(CXX) $(CFLAGS) $^
+
+$(MAITREPOULEPOULE).o: $(MAITREPOULEPOULE).cpp
+	$(CXX) $(CFLAGS) $^
+
+$(COQ).o: $(COQ).cpp
+	$(CXX) $(CFLAGS) $^
+
+$(OEUF).o: $(OEUF).cpp
+	$(CXX) $(CFLAGS) $^
+
+$(POULE).o: $(POULE).cpp
+	$(CXX) $(CFLAGS) $^
+
+$(RENARD).o: $(RENARD).cpp
+	$(CXX) $(CFLAGS) $^
+
+$(IHM).o: $(IHM).cpp
+	$(CXX) $(CFLAGS) $^
 
 .PHONY: check cppcheck format clean cleanall
 
