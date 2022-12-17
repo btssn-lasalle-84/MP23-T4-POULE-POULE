@@ -7,7 +7,7 @@ Oeuf::Oeuf() : nbCartesOeuf(15)
 
 }
 
-Oeuf::Oeuf(unsigned int nbCartesOeuf= 15) : nbCartesOeuf(nbCartesOeuf)
+Oeuf::Oeuf(unsigned int nbCartesOeuf = 15) : nbCartesOeuf(nbCartesOeuf)
 {
 
 }
