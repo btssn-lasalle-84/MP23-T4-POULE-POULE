@@ -1,6 +1,5 @@
-#include <iostream>
-#include <string>
 #include "Joueur.h"
+#include <string>
 
 using namespace std;
 

@@ -1,7 +1,3 @@
-#ifndef JOUEUR_H
-#define JOUEUR_H
-
-#include <iostream>
 #include <string>
 
 class MaitrePoulePoule;
@@ -18,5 +14,3 @@ class Joueur
         MaitrePoulePoule* getMaitrePoulePoule();
         void setMaitrePoulePoule(MaitrePoulePoule* maitrePoulePoule);
 };
-
-#endif // JOUEUR_H
