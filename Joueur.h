@@ -1,16 +1,16 @@
-#include <string>
+#ifndef JOUEUR_H
+#define JOUEUR_H
 
-class MaitrePoulePoule;
+#include <string>
 class Joueur
 {
     private:
-        MaitrePoulePoule* leMaitrePoulePoule;
         std::string nomJoueur;
 
     public:
         Joueur();
         Joueur(std::string nomJoueur);
         std::string getNomJoueur() const;
-        MaitrePoulePoule* getMaitrePoulePoule();
-        void setMaitrePoulePoule(MaitrePoulePoule* maitrePoulePoule);
 };
+
+#endif // JOUEUR_H
