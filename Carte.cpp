@@ -1,5 +1,4 @@
 #include "Carte.h"
-#include <iostream>
 #include <string>
 
 Carte::Carte() : valeurCarte(0)
