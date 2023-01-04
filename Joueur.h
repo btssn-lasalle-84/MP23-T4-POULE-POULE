@@ -1,6 +1,8 @@
 #ifndef JOUEUR_H
 #define JOUEUR_H
 
+#include <string>
+
 class Joueur
 {
   private:
