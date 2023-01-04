@@ -1,13 +1,11 @@
 #include "Joueur.h"
 #include <string>
 
-using namespace std;
-
-Joueur::Joueur() : nomJoueur(" ")
+Joueur::Joueur() : nomJoueur("")
 {
 }
 
-Joueur::Joueur(string nomJoueur) : nomJoueur(nomJoueur)
+Joueur::Joueur(std::string nomJoueur) : nomJoueur(nomJoueur)
 {
 }
 
