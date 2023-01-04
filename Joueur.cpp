@@ -1,7 +1,7 @@
 #include "Joueur.h"
 #include <string>
 
-Joueur::Joueur() : nomJoueur(" ")
+Joueur::Joueur() : nomJoueur("")
 {
 
 }
