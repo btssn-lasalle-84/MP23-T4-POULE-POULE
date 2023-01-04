@@ -12,6 +12,6 @@ class Joueur
     Joueur();
     Joueur(std::string nomJoueur);
     std::string getNomJoueur() const;
-};
+}
 
 #endif // JOUEUR_H
