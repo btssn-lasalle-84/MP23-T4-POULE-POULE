@@ -3,10 +3,6 @@ MAIN = main
 JOUEUR = Joueur
 CARTE = Carte
 MAITREPOULEPOULE = MaitrePoulePoule
-COQ = Coq
-OEUF = Oeuf
-RENARD = Renard
-POULE = Poule
 IHM = IHM
 
 SOURCES := $(wildcard *.cpp)
@@ -19,7 +15,7 @@ RM = rm -f
 
 all: $(TARGET)
 
-$(TARGET): $(MAIN).o $(JOUEUR).o $(CARTE).o $(MAITREPOULEPOULE).o $(COQ).o $(OEUF).o $(RENARD).o $(POULE).o $(IHM).o
+$(TARGET): $(MAIN).o $(JOUEUR).o $(CARTE).o $(MAITREPOULEPOULE).o $(IHM).o
 	$(LD) $@ $(LDFLAGS) $^
 
 $(MAIN).o: $(MAIN).cpp
@@ -32,18 +28,6 @@ $(CARTE).o: $(CARTE).cpp
 	$(CXX) $(CFLAGS) $^
 
 $(MAITREPOULEPOULE).o: $(MAITREPOULEPOULE).cpp
-	$(CXX) $(CFLAGS) $^
-
-$(COQ).o: $(COQ).cpp
-	$(CXX) $(CFLAGS) $^
-
-$(OEUF).o: $(OEUF).cpp
-	$(CXX) $(CFLAGS) $^
-
-$(RENARD).o: $(RENARD).cpp
-	$(CXX) $(CFLAGS) $^
-
-$(POULE).o: $(POULE).cpp
 	$(CXX) $(CFLAGS) $^
 
 $(IHM).o: $(IHM).cpp
