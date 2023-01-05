@@ -1,11 +1,11 @@
 #include "Carte.h"
 #include <string>
 
-Carte::Carte() : valeurCarte(0)
+Carte::Carte() : valeurCarte()
 {
 }
 
-Carte::Carte(std::string symbole, unsigned int valeurCarte) :
+Carte::Carte(std::string symbole, ValeurCarte valeurCarte) :
     symbole(symbole), valeurCarte(valeurCarte)
 {
 }

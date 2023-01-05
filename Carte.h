@@ -10,14 +10,20 @@
 
 class Carte
 {
-  private:
-    std::string  symbole;
-    unsigned int valeurCarte;
-
   public:
+    enum ValeurCarte
+    {
+        Oeuf,
+        Poule,
+        Renard,
+        Coq,
+    };
     Carte();
-    Carte(std::string symbole, unsigned int valeurCarte);
+    Carte(ValeurCarte valeurCarte);
     ~Carte();
+
+  private:
+    ValeurCarte valeurCarte;
 };
 
 #endif
