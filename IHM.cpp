@@ -9,14 +9,8 @@ void IHM::afficheMenu()
     std::cout << "[1] Commencer une partie" << std::endl;
     std::cout << "[2] Règles du jeu" << std::endl;
     std::cin >> choixJoueur;
-    if(choixJoueur != 1 || choixJoueur != 2)
-    {
-        std::cout << "Veuillez entrer une valeur correcte !" << std::endl;
-        sleep(5);
-        system("clear");
-        afficheMenu();
-    }
-    else if(choixJoueur == 1)
+
+    if(choixJoueur == 1)
     {
         system("clear");
         demarrePartie();
@@ -25,6 +19,13 @@ void IHM::afficheMenu()
     {
         system("clear");
         afficheRegles();
+    }
+    else
+    {
+        std::cout << "Veuillez entrer une valeur correcte !" << std::endl;
+        sleep(3);
+        system("clear");
+        afficheMenu();
     }
 }
 
@@ -35,7 +36,6 @@ void IHM::demarrePartie()
     std::cout << "Etes-vous prêt " << nomJoueur << " ? La partie va débuter"
               << std::endl;
 
-    melange();
     sleep(3);
     system("clear");
     deroulementPartie();
@@ -67,19 +67,14 @@ void IHM::afficheRegles()
     std::cout << "Appuyez sur [1] afin de revenir au menu principal"
               << std::endl;
     std::cin >> choixJoueur;
+
     while(choixJoueur != 1)
     {
         std::cout << "Veuillez entrer [1]" << std::endl;
+        std::cin >> choixJoueur;
     }
-    if(choixJoueur == 1)
-    {
-        system("clear");
-        afficheMenu();
-    }
-}
-
-void IHM::melange()
-{
+    system("clear");
+    afficheMenu();
 }
 
 void IHM::deroulementPartie()
@@ -166,9 +161,9 @@ void IHM::deroulementPartie()
                     system("clear");
 
                     std::cout << "Manche finie !" << std::endl;
-                    std::cout
-                      << "Saisissez le nombre d'oeufs que vous pensez avoir "
-                         "compter : ";
+                    std::cout << "Saisissez le nombre d'oeufs que vous "
+                                 "pensez avoir "
+                                 "compter : ";
                     std::cin >> reponseJoueur;
 
                     if(reponseJoueur == compteurOeuf)
@@ -193,10 +188,10 @@ void IHM::deroulementPartie()
             case 5:
                 if(compteurOeuf == 5)
                 {
-                    std::cout
-                      << "La manche est terminée, le nombre d'oeuf est égal "
-                         "à 5."
-                      << std::endl;
+                    std::cout << "La manche est terminée, le nombre d'oeuf "
+                                 "est égal "
+                                 "à 5."
+                              << std::endl;
                 }
         }
     }
