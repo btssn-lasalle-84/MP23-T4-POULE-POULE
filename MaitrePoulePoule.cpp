@@ -18,7 +18,7 @@ void MaitrePoulePoule::creeCartesOeuf()
 {
     for(int i = 0; i < NB_CARTES_OEUF; i++)
     {
-        cartesOeuf.emplace_back(Oeuf);
+        cartesOeuf.emplace_back(Carte::ValeurCarte::Oeuf);
     }
 }
 
@@ -26,7 +26,7 @@ void MaitrePoulePoule::creeCartesPoule()
 {
     for(int i = 0; i < NB_CARTES_POULE; i++)
     {
-        cartesPoule.emplace_back(Poule);
+        cartesPoule.emplace_back(Carte::ValeurCarte::Poule);
     }
 }
 
@@ -34,7 +34,7 @@ void MaitrePoulePoule::creeCartesRenard()
 {
     for(int i = 0; i < NB_CARTES_RENARD; i++)
     {
-        cartesRenard.emplace_back(Renard);
+        cartesRenard.emplace_back(Carte::ValeurCarte::Renard);
     }
 }
 
@@ -42,7 +42,7 @@ void MaitrePoulePoule::creeCartesCOQ()
 {
     for(int i = 0; i < NB_CARTES_COQ; i++)
     {
-        cartesCoq.emplace_back(Coq);
+        cartesCoq.emplace_back(Carte::ValeurCarte::Coq);
     }
 }
 
