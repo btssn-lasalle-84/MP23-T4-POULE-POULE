@@ -1,16 +1,19 @@
 #ifndef MAITREPOULEPOULE_H
 #define MAITREPOULEPOULE_H
 
-#include "Carte.h"
 #include <string>
 #include <vector>
 
 class Carte;
+class Joueur;
+class IHM;
 
 class MaitrePoulePoule
 {
   private:
     Carte              cartes;
+    Joueur*            monJoueur;
+    IHM*               monIHM;
     unsigned int       nbPointJoueur;
     std::vector<Carte> cartesOeuf;
     std::vector<Carte> cartesPoule;
