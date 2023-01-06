@@ -3,10 +3,13 @@
 
 #include <string>
 
+class MaitrePoulePoule;
+
 class Joueur
 {
   private:
-    std::string nomJoueur;
+    MaitrePoulePoule* monMaitrePoulePoule;
+    std::string       nomJoueur;
 
   public:
     Joueur();
