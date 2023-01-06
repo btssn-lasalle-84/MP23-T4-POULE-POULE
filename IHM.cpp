@@ -15,8 +15,7 @@ void IHM::afficheMenu()
 void IHM::saisieNomJoueur()
 {
     std::cout << "Veuillez entrer votre prénom : ";
-    std::cout << "Etes-vous prêt ? La partie va débuter"
-              << std::endl;
+    std::cout << "Etes-vous prêt ? La partie va débuter" << std::endl;
 }
 
 void IHM::afficheRegles()
