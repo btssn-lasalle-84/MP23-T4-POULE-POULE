@@ -10,7 +10,7 @@ class Carte;
 class MaitrePoulePoule
 {
   private:
-    Carte*             cartes;
+    Carte              cartes;
     unsigned int       nbPointJoueur;
     std::vector<Carte> cartesOeuf;
     std::vector<Carte> cartesPoule;
