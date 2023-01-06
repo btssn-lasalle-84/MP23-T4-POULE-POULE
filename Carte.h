@@ -21,6 +21,7 @@ class Carte
     Carte();
     Carte(ValeurCarte valeurCarte);
     ~Carte();
+    unsigned int getValeurCarte() const;
 
   private:
     ValeurCarte valeurCarte;
