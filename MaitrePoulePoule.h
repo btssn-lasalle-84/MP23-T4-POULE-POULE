@@ -3,17 +3,14 @@
 
 #include <string>
 #include <vector>
+#include "Carte.h"
 
 class Carte;
-class Joueur;
-class IHM;
 
 class MaitrePoulePoule
 {
   private:
     Carte              cartes;
-    Joueur*            monJoueur;
-    IHM*               monIHM;
     unsigned int       nbPointJoueur;
     std::vector<Carte> cartesOeuf;
     std::vector<Carte> cartesPoule;
