@@ -5,7 +5,7 @@
 #include <iostream>
 #include <unistd.h>
 
-std::string IHM::saisieNomJoueur()
+std::string IHM::entreNomJoueur()
 {
     std::cout << "Pour commencer, veuillez entrer votre prénom : ";
     std::string nomJoueur;
@@ -15,9 +15,17 @@ std::string IHM::saisieNomJoueur()
 
 void IHM::afficheMenu()
 {
-    std::cout << ". Bienvenue sur le jeu du Poule-Poule !" << std::endl;
+    std::cout << "Bienvenue sur le jeu du Poule-Poule !" << std::endl;
     std::cout << "[1] Commencer une partie" << std::endl;
     std::cout << "[2] Règles du jeu" << std::endl;
+}
+
+unsigned int IHM::entreChoixJoueur()
+{
+    std::cout << "Entrez votre réponse : ";
+    unsigned int choixJoueur;
+    std::cin >> choixJoueur;
+    return choixJoueur;
 }
 
 void IHM::afficheRegles()

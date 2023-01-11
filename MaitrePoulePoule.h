@@ -25,6 +25,7 @@ class MaitrePoulePoule
     void               jouePartie();
     void               melangePaquet();
     void               distribueCartes();
+    void               deroulePartie();
     std::vector<Carte> creeCartesOeuf();
     std::vector<Carte> creeCartesPoule();
     std::vector<Carte> creeCartesRenard();

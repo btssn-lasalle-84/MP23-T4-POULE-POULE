@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <unistd.h>
 
 #ifdef DEBUG_MAITREPOULEPOULE
 #include <iostream>
@@ -33,7 +34,7 @@ MaitrePoulePoule::~MaitrePoulePoule()
 
 void MaitrePoulePoule::jouePartie()
 {
-    std::string nomJoueur = monIHM->saisieNomJoueur();
+    std::string nomJoueur = monIHM->entreNomJoueur();
     monJoueur->setNomJoueur(nomJoueur);
 
 #ifdef DEBUG_MAITREPOULEPOULE
@@ -42,7 +43,7 @@ void MaitrePoulePoule::jouePartie()
 #endif
 
     monIHM->afficheMenu();
-    distribueCartes();
+    deroulePartie();
 }
 
 void MaitrePoulePoule::melangePaquet()
@@ -55,6 +56,34 @@ void MaitrePoulePoule::distribueCartes()
     for(unsigned int i = 0; i < paquetCartes.size(); i++)
     {
         monIHM->afficheCarte();
+    }
+}
+
+void MaitrePoulePoule::deroulePartie()
+{
+    unsigned int choixJoueur = monIHM->entreChoixJoueur();
+    monJoueur->setChoixJoueur(choixJoueur);
+
+    if(monJoueur->getChoixJoueur() == 1)
+    {
+        system("clear");
+        distribueCartes();
+    }
+    else if(monJoueur->getChoixJoueur() == 2)
+    {
+        system("clear");
+        monIHM->afficheRegles();
+    }
+    else
+    {
+#ifdef DEBUG_MAITREPOULEPOULE
+        std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] "
+                  << "choixJoueur = " << monJoueur->getChoixJoueur()
+                  << std::endl;
+#endif
+        sleep(2);
+        system("clear");
+        jouePartie();
     }
 }
 
