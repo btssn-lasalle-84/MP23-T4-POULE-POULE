@@ -13,3 +13,8 @@ std::string Joueur::getNomJoueur() const
 {
     return nomJoueur;
 }
+
+void Joueur::setNomJoueur(std::string nomJoueur)
+{
+    this->nomJoueur = nomJoueur;
+}

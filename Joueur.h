@@ -3,18 +3,16 @@
 
 #include <string>
 
-class MaitrePoulePoule;
-
 class Joueur
 {
   private:
-    MaitrePoulePoule* monMaitrePoulePoule;
-    std::string       nomJoueur;
+    std::string nomJoueur;
 
   public:
     Joueur();
     Joueur(std::string nomJoueur);
     std::string getNomJoueur() const;
+    void        setNomJoueur(std::string nomJoueur);
 };
 
 #endif // JOUEUR_H
