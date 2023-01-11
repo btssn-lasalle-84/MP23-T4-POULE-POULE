@@ -5,6 +5,16 @@
 #include <iostream>
 #include <unistd.h>
 
+void IHM::saisieNomJoueur()
+{
+    std::cout << "Pour commencer, veuillez entrer votre prénom : ";
+    std::string nomJoueur;
+    std::cin >> nomJoueur;
+    Joueur joueur(nomJoueur);
+
+    std::cout << "OK " + joueur.getNomJoueur() << std::endl;
+}
+
 void IHM::afficheMenu()
 {
     std::cout << "Bienvenue sur le jeu du Poule-Poule !" << std::endl;
@@ -12,16 +22,11 @@ void IHM::afficheMenu()
     std::cout << "[2] Règles du jeu" << std::endl;
 }
 
-void IHM::saisieNomJoueur()
-{
-    std::cout << "Veuillez entrer votre prénom : ";
-    std::cout << "Etes-vous prêt ? La partie va débuter" << std::endl;
-}
-
 void IHM::afficheRegles()
 {
-    std::cout << "Tout d’abord, l’ordinateur sera le réalisateur, le Maître de "
-                 "Poule Poule(MPP)."
+    std::cout << "Voici les règles" << std::endl;
+    std::cout << "Tout d’abord, l’ordinateur sera le réalisateur, le Maître "
+                 "Poule Poule (MPP)."
               << std::endl;
     std::cout << "Le MPP va afficher successivement les cartes, une "
                  "par une. Une "
@@ -46,8 +51,9 @@ void IHM::afficheRegles()
               << std::endl;
 }
 
-void IHM::afficheCarte(Carte carte)
+void IHM::afficheCarte()
 {
+    Carte carte;
     switch(carte.getValeurCarte())
     {
         case Carte::ValeurCarte::Oeuf:
