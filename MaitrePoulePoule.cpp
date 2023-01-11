@@ -18,6 +18,7 @@ MaitrePoulePoule::MaitrePoulePoule(unsigned int nbPointJoueur) :
 void MaitrePoulePoule::jouePartie()
 {
     monIHM->afficheMenu();
+    monIHM->saisieNomJoueur();
 }
 
 void MaitrePoulePoule::creeCartesOeuf()
