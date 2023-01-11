@@ -1,77 +1,99 @@
 #include "MaitrePoulePoule.h"
-#include "Carte.h"
+#include "Joueur.h"
 #include "IHM.h"
+#include "Carte.h"
 #include <string>
 #include <vector>
 #include <algorithm>
 
-MaitrePoulePoule::MaitrePoulePoule() : nbPointJoueur(0)
+#ifdef DEBUG_MAITREPOULEPOULE
+#include <iostream>
+#endif
+
+MaitrePoulePoule::MaitrePoulePoule() :
+    monJoueur(new Joueur), monIHM(new IHM), nbPointJoueur(0)
 {
+#ifdef DEBUG_MAITREPOULEPOULE
+    std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] " << this
+              << std::endl;
+#endif
     creePaquetCartes();
 }
 
-MaitrePoulePoule::MaitrePoulePoule(unsigned int nbPointJoueur) :
-    nbPointJoueur(nbPointJoueur)
+MaitrePoulePoule::~MaitrePoulePoule()
 {
+    delete monIHM;
+    delete monJoueur;
+#ifdef DEBUG_MAITREPOULEPOULE
+    std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] " << this
+              << std::endl;
+#endif
 }
 
 void MaitrePoulePoule::jouePartie()
 {
-    monIHM->saisieNomJoueur();
     monIHM->afficheMenu();
+
+    std::string nomJoueur = monIHM->saisieNomJoueur();
+    monJoueur->setNomJoueur(nomJoueur);
+
+#ifdef DEBUG_MAITREPOULEPOULE
+    std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] "
+              << "nomJoueur = " << monJoueur->getNomJoueur() << std::endl;
+#endif
 }
 
-void MaitrePoulePoule::melangePaquet()
+std::vector<Carte> MaitrePoulePoule::creeCartesOeuf()
 {
-    std::random_shuffle(paquetCartes.begin(), paquetCartes.end());
-}
-
-void MaitrePoulePoule::distribueCartes()
-{
-    for(unsigned int i = 0; i < paquetCartes.size(); i++)
-    {
-        monIHM->afficheCarte();
-    }
-}
-
-void MaitrePoulePoule::creeCartesOeuf()
-{
+    std::vector<Carte> cartes;
     for(int i = 0; i < NB_CARTES_OEUF; i++)
     {
-        cartesOeuf.emplace_back(Carte::ValeurCarte::Oeuf);
+        cartes.emplace_back(Carte::ValeurCarte::Oeuf);
     }
+    return cartes;
 }
 
-void MaitrePoulePoule::creeCartesPoule()
+std::vector<Carte> MaitrePoulePoule::creeCartesPoule()
 {
+    std::vector<Carte> cartes;
     for(int i = 0; i < NB_CARTES_POULE; i++)
     {
-        cartesPoule.emplace_back(Carte::ValeurCarte::Poule);
+        cartes.emplace_back(Carte::ValeurCarte::Poule);
     }
+    return cartes;
 }
 
-void MaitrePoulePoule::creeCartesRenard()
+std::vector<Carte> MaitrePoulePoule::creeCartesRenard()
 {
+    std::vector<Carte> cartes;
     for(int i = 0; i < NB_CARTES_RENARD; i++)
     {
-        cartesRenard.emplace_back(Carte::ValeurCarte::Renard);
+        cartes.emplace_back(Carte::ValeurCarte::Renard);
     }
+    return cartes;
 }
 
-void MaitrePoulePoule::creeCartesCOQ()
+std::vector<Carte> MaitrePoulePoule::creeCartesCOQ()
 {
+    std::vector<Carte> cartes;
     for(int i = 0; i < NB_CARTES_COQ; i++)
     {
-        cartesCoq.emplace_back(Carte::ValeurCarte::Coq);
+        cartes.emplace_back(Carte::ValeurCarte::Coq);
     }
+    return cartes;
 }
 
 void MaitrePoulePoule::creePaquetCartes()
 {
-    creeCartesOeuf();
-    creeCartesPoule();
-    creeCartesRenard();
-    creeCartesCOQ();
+    std::vector<Carte> cartesOeuf;
+    std::vector<Carte> cartesPoule;
+    std::vector<Carte> cartesRenard;
+    std::vector<Carte> cartesCoq;
+
+    cartesOeuf   = creeCartesOeuf();
+    cartesPoule  = creeCartesPoule();
+    cartesRenard = creeCartesRenard();
+    cartesCoq    = creeCartesCOQ();
 
     paquetCartes.insert(paquetCartes.end(),
                         cartesOeuf.begin(),
@@ -83,4 +105,9 @@ void MaitrePoulePoule::creePaquetCartes()
                         cartesRenard.begin(),
                         cartesRenard.end());
     paquetCartes.insert(paquetCartes.end(), cartesCoq.begin(), cartesCoq.end());
+}
+
+void MaitrePoulePoule::melangePaquet()
+{
+    std::random_shuffle(paquetCartes.begin(), paquetCartes.end());
 }

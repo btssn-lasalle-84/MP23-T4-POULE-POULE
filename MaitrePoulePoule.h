@@ -5,6 +5,8 @@
 #include <vector>
 #include "Carte.h"
 
+#define DEBUG_MAITREPOULEPOULE
+
 class Carte;
 class Joueur;
 class IHM;
@@ -12,27 +14,21 @@ class IHM;
 class MaitrePoulePoule
 {
   private:
-    Carte              cartes;
     Joueur*            monJoueur;
     IHM*               monIHM;
-    unsigned int       nbPointJoueur;
-    std::vector<Carte> cartesOeuf;
-    std::vector<Carte> cartesPoule;
-    std::vector<Carte> cartesRenard;
-    std::vector<Carte> cartesCoq;
     std::vector<Carte> paquetCartes;
+    unsigned int       nbPointJoueur;
 
   public:
     MaitrePoulePoule();
-    MaitrePoulePoule(unsigned int nbPointJoueur);
-    void jouePartie();
-    void melangePaquet();
-    void distribueCartes();
-    void creeCartesOeuf();
-    void creeCartesPoule();
-    void creeCartesRenard();
-    void creeCartesCOQ();
-    void creePaquetCartes();
+    ~MaitrePoulePoule();
+    void               jouePartie();
+    std::vector<Carte> creeCartesOeuf();
+    std::vector<Carte> creeCartesPoule();
+    std::vector<Carte> creeCartesRenard();
+    std::vector<Carte> creeCartesCOQ();
+    void               creePaquetCartes();
+    void               melangePaquet();
 };
 
 #endif

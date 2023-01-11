@@ -5,19 +5,17 @@
 #include <iostream>
 #include <unistd.h>
 
-void IHM::saisieNomJoueur()
+std::string IHM::saisieNomJoueur()
 {
     std::cout << "Pour commencer, veuillez entrer votre prénom : ";
     std::string nomJoueur;
     std::cin >> nomJoueur;
-    Joueur joueur(nomJoueur);
-
-    std::cout << "OK " + joueur.getNomJoueur() << std::endl;
+    return nomJoueur;
 }
 
 void IHM::afficheMenu()
 {
-    std::cout << "Bienvenue sur le jeu du Poule-Poule !" << std::endl;
+    std::cout << ". Bienvenue sur le jeu du Poule-Poule !" << std::endl;
     std::cout << "[1] Commencer une partie" << std::endl;
     std::cout << "[2] Règles du jeu" << std::endl;
 }
