@@ -10,10 +10,10 @@ class IHM
 {
   private:
   public:
-    void afficheMenu();
     void saisieNomJoueur();
+    void afficheMenu();
     void afficheRegles();
-    void afficheCarte(Carte carte);
+    void afficheCarte();
 };
 
 #endif // IHM_H
