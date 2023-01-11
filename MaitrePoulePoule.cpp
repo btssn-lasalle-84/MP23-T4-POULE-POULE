@@ -18,6 +18,7 @@ MaitrePoulePoule::MaitrePoulePoule() :
               << std::endl;
 #endif
     creePaquetCartes();
+    melangePaquet();
 }
 
 MaitrePoulePoule::~MaitrePoulePoule()
@@ -32,8 +33,6 @@ MaitrePoulePoule::~MaitrePoulePoule()
 
 void MaitrePoulePoule::jouePartie()
 {
-    monIHM->afficheMenu();
-
     std::string nomJoueur = monIHM->saisieNomJoueur();
     monJoueur->setNomJoueur(nomJoueur);
 
@@ -41,6 +40,22 @@ void MaitrePoulePoule::jouePartie()
     std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] "
               << "nomJoueur = " << monJoueur->getNomJoueur() << std::endl;
 #endif
+
+    monIHM->afficheMenu();
+    distribueCartes();
+}
+
+void MaitrePoulePoule::melangePaquet()
+{
+    std::random_shuffle(paquetCartes.begin(), paquetCartes.end());
+}
+
+void MaitrePoulePoule::distribueCartes()
+{
+    for(unsigned int i = 0; i < paquetCartes.size(); i++)
+    {
+        monIHM->afficheCarte();
+    }
 }
 
 std::vector<Carte> MaitrePoulePoule::creeCartesOeuf()
@@ -105,9 +120,4 @@ void MaitrePoulePoule::creePaquetCartes()
                         cartesRenard.begin(),
                         cartesRenard.end());
     paquetCartes.insert(paquetCartes.end(), cartesCoq.begin(), cartesCoq.end());
-}
-
-void MaitrePoulePoule::melangePaquet()
-{
-    std::random_shuffle(paquetCartes.begin(), paquetCartes.end());
 }
