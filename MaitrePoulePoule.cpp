@@ -1,5 +1,6 @@
 #include "MaitrePoulePoule.h"
 #include "Carte.h"
+#include "IHM.h"
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -12,6 +13,11 @@ MaitrePoulePoule::MaitrePoulePoule() : nbPointJoueur(0)
 MaitrePoulePoule::MaitrePoulePoule(unsigned int nbPointJoueur) :
     nbPointJoueur(nbPointJoueur)
 {
+}
+
+void MaitrePoulePoule::jouePartie()
+{
+    monIHM->afficheMenu();
 }
 
 void MaitrePoulePoule::creeCartesOeuf()
