@@ -5,7 +5,7 @@
 #include <iostream>
 #include <unistd.h>
 
-std::string IHM::entreNomJoueur()
+std::string IHM::entreNomJoueur() const
 {
     std::cout << "Pour commencer, veuillez entrer votre prénom : ";
     std::string nomJoueur;
@@ -13,14 +13,14 @@ std::string IHM::entreNomJoueur()
     return nomJoueur;
 }
 
-void IHM::afficheMenu()
+void IHM::afficheMenu() const
 {
     std::cout << "Bienvenue sur le jeu du Poule-Poule !" << std::endl;
     std::cout << "[1] Commencer une partie" << std::endl;
     std::cout << "[2] Règles du jeu" << std::endl;
 }
 
-unsigned int IHM::entreChoixJoueur()
+unsigned int IHM::entreChoixJoueur() const
 {
     std::cout << "Entrez votre réponse : ";
     unsigned int choixJoueur;
@@ -28,7 +28,7 @@ unsigned int IHM::entreChoixJoueur()
     return choixJoueur;
 }
 
-void IHM::afficheRegles()
+void IHM::afficheRegles() const
 {
     std::cout << "Voici les règles" << std::endl;
     std::cout << "Tout d’abord, l’ordinateur sera le réalisateur, le Maître "
@@ -57,9 +57,8 @@ void IHM::afficheRegles()
               << std::endl;
 }
 
-void IHM::afficheCarte()
+void IHM::afficheCarte(const Carte& carte) const
 {
-    Carte carte;
     switch(carte.getValeurCarte())
     {
         case Carte::ValeurCarte::Oeuf:
