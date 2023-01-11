@@ -10,11 +10,11 @@ class IHM
 {
   private:
   public:
-    std::string  entreNomJoueur();
-    void         afficheMenu();
-    unsigned int entreChoixJoueur();
-    void         afficheRegles();
-    void         afficheCarte();
+    std::string  entreNomJoueur() const;
+    void         afficheMenu() const;
+    unsigned int entreChoixJoueur() const;
+    void         afficheRegles() const;
+    void         afficheCarte(const Carte& carte) const;
 };
 
 #endif // IHM_H

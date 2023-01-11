@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <unistd.h>
+#include <ctime>
 
 #ifdef DEBUG_MAITREPOULEPOULE
 #include <iostream>
@@ -48,6 +49,7 @@ void MaitrePoulePoule::jouePartie()
 
 void MaitrePoulePoule::melangePaquet()
 {
+    std::srand(unsigned(std::time(0)));
     std::random_shuffle(paquetCartes.begin(), paquetCartes.end());
 }
 
@@ -55,7 +57,7 @@ void MaitrePoulePoule::distribueCartes()
 {
     for(unsigned int i = 0; i < paquetCartes.size(); i++)
     {
-        monIHM->afficheCarte();
+        monIHM->afficheCarte(paquetCartes[i]);
     }
 }
 
