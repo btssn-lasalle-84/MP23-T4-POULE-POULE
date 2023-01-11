@@ -84,8 +84,9 @@ void IHM::afficheCarte(const Carte& carte) const
                     |                                        |
                     |________________________________________|
                                                     )" << '\n';
-
-                                                    break;
+                    sleep(TEMPS_DISTRIBUTION_CARTE);
+                    system("clear");
+                    break;
 
         case Carte::ValeurCarte::Poule:
                     std::cout << R"(
@@ -110,8 +111,9 @@ void IHM::afficheCarte(const Carte& carte) const
                     |                  '                     |
                     |________________________________________|
                                                     )" << '\n';
-
-                                                    break;
+                    sleep(TEMPS_DISTRIBUTION_CARTE);
+                    system("clear");
+                    break;
 
         case Carte::ValeurCarte::Renard:
         std::cout << R"(
@@ -136,8 +138,9 @@ void IHM::afficheCarte(const Carte& carte) const
                     |           `-../____,..---'`            |
                     |________________________________________|
                                                     )" << '\n';
-
-            break;
+                    sleep(TEMPS_DISTRIBUTION_CARTE);
+        system("clear");
+        break;
 
         case Carte::ValeurCarte::Coq:
                     std::cout << R"(
@@ -162,8 +165,9 @@ void IHM::afficheCarte(const Carte& carte) const
                     |         ~` ~"'                         |
                     |________________________________________|
                                                     )" << '\n';
-
-                                                    break;
+                    sleep(TEMPS_DISTRIBUTION_CARTE);
+                system("clear");
+                break;
                 default:
                     break;
     }

@@ -6,9 +6,13 @@
 
 #define TEMPS_DISTRIBUTION_CARTE 2
 
+class Joueur;
+
 class IHM
 {
   private:
+    Joueur* monJoueur;
+
   public:
     std::string  entreNomJoueur() const;
     void         afficheMenu() const;
