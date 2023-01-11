@@ -23,12 +23,13 @@ class MaitrePoulePoule
     MaitrePoulePoule();
     ~MaitrePoulePoule();
     void               jouePartie();
+    void               melangePaquet();
+    void               distribueCartes();
     std::vector<Carte> creeCartesOeuf();
     std::vector<Carte> creeCartesPoule();
     std::vector<Carte> creeCartesRenard();
     std::vector<Carte> creeCartesCOQ();
     void               creePaquetCartes();
-    void               melangePaquet();
 };
 
 #endif
