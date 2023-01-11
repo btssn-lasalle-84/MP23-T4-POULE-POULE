@@ -25,6 +25,7 @@ class MaitrePoulePoule
   public:
     MaitrePoulePoule();
     MaitrePoulePoule(unsigned int nbPointJoueur);
+    void jouePartie();
     void creeCartesOeuf();
     void creeCartesPoule();
     void creeCartesRenard();
