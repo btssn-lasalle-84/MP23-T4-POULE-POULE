@@ -17,8 +17,21 @@ MaitrePoulePoule::MaitrePoulePoule(unsigned int nbPointJoueur) :
 
 void MaitrePoulePoule::jouePartie()
 {
-    monIHM->afficheMenu();
     monIHM->saisieNomJoueur();
+    monIHM->afficheMenu();
+}
+
+void MaitrePoulePoule::melangePaquet()
+{
+    std::random_shuffle(paquetCartes.begin(), paquetCartes.end());
+}
+
+void MaitrePoulePoule::distribueCartes()
+{
+    for(unsigned int i = 0; i < paquetCartes.size(); i++)
+    {
+        monIHM->afficheCarte();
+    }
 }
 
 void MaitrePoulePoule::creeCartesOeuf()
@@ -70,9 +83,4 @@ void MaitrePoulePoule::creePaquetCartes()
                         cartesRenard.begin(),
                         cartesRenard.end());
     paquetCartes.insert(paquetCartes.end(), cartesCoq.begin(), cartesCoq.end());
-}
-
-void MaitrePoulePoule::melangePaquet()
-{
-    std::random_shuffle(paquetCartes.begin(), paquetCartes.end());
 }

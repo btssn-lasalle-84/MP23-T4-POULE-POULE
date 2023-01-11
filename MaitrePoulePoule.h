@@ -26,12 +26,13 @@ class MaitrePoulePoule
     MaitrePoulePoule();
     MaitrePoulePoule(unsigned int nbPointJoueur);
     void jouePartie();
+    void melangePaquet();
+    void distribueCartes();
     void creeCartesOeuf();
     void creeCartesPoule();
     void creeCartesRenard();
     void creeCartesCOQ();
     void creePaquetCartes();
-    void melangePaquet();
 };
 
 #endif
