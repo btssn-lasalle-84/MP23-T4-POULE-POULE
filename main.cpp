@@ -1,9 +1,9 @@
-#include "IHM.h"
+#include "MaitrePoulePoule.h"
 
 int main()
 {
-    IHM ihm;
-    ihm.afficheMenu();
+    MaitrePoulePoule maitrePoulePoule;
+    maitrePoulePoule.jouePartie();
 
     return 0;
 }
