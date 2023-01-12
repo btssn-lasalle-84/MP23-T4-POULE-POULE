@@ -18,6 +18,8 @@ class MaitrePoulePoule
     IHM*               monIHM;
     std::vector<Carte> paquetCartes;
     unsigned int       nbPointJoueur;
+    unsigned int       compteurOeuf;
+    unsigned int       compteurOeufCouve;
 
   public:
     MaitrePoulePoule();
@@ -26,6 +28,8 @@ class MaitrePoulePoule
     void               melangePaquet();
     void               distribueCartes();
     void               deroulePartie();
+    void               compteNbOeuf(const Carte& carte);
+    void               verifieReponseJoueur();
     std::vector<Carte> creeCartesOeuf();
     std::vector<Carte> creeCartesPoule();
     std::vector<Carte> creeCartesRenard();
