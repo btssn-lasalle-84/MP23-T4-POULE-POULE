@@ -11,7 +11,7 @@ std::string IHM::entreNomJoueur() const
     std::string nomJoueur;
     std::cin >> nomJoueur;
     temporiseAffichage();
-    effacerEcran();
+    effaceEcran();
     return nomJoueur;
 }
 
@@ -176,10 +176,10 @@ void IHM::afficheCarte(const Carte& carte) const
     }
 }
 
-void IHM::partieFinie()
+void IHM::filmFini()
 {
     temporiseAffichage();
-    effacerEcran();
+    effaceEcran();
 
     std::cout << "Manche finie !" << std::endl;
     std::cout << "Saisissez le nombre d'oeufs que vous pensez avoir compter : ";
@@ -196,7 +196,7 @@ void IHM::partiePerdue(std::string nomJoueur)
     std::cout << "Perdu... dommage... " << nomJoueur << std::endl;
 }
 
-void IHM::effacerEcran() const
+void IHM::effaceEcran() const
 {
     system("clear");
 }

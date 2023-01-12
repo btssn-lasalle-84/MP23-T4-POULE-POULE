@@ -25,7 +25,7 @@ class MaitrePoulePoule
     unsigned int       compteurOeufs;
     unsigned int       compteurOeufsCouves;
 
-    void               deroulePartie();
+    void               derouleFilm();
     void               reinitialiseCompteurs();
     void               distribueCartes();
     bool               estPartieFinie(const Carte& carte) const;
@@ -35,7 +35,7 @@ class MaitrePoulePoule
     std::vector<Carte> creeCartesCOQ();
     void               creePaquetCartes();
     void               melangePaquet();
-    void               compteNbOeuf(const Carte& carte);
+    void               compteNbOeufs(const Carte& carte);
     bool               verifieReponseJoueur() const;
 
   public:

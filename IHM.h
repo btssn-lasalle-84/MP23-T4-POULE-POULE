@@ -6,8 +6,6 @@
 
 #define TEMPS_DISTRIBUTION_CARTE 2
 
-class Joueur;
-
 class IHM
 {
   private:
@@ -20,11 +18,11 @@ class IHM
     void afficheRegles() const;
     void afficheCarte(const Carte& carte) const;
 
-    void partieFinie();
+    void filmFini();
     void partieGagnee(std::string nomJoueur);
     void partiePerdue(std::string nomJoueur);
 
-    void effacerEcran() const;
+    void effaceEcran() const;
     void temporiseAffichage() const;
     void temporiseCarte() const;
 };
