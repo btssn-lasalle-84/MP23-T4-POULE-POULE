@@ -11,20 +11,18 @@ class Joueur;
 class IHM
 {
   private:
-    Joueur* monJoueur;
-
   public:
     std::string  entreNomJoueur() const;
     unsigned int entreChoixJoueur() const;
     unsigned int entreReponseNbOeufs() const;
 
-    void afficheMenu() const;
+    void afficheMenu(std::string nomJoueur) const;
     void afficheRegles() const;
     void afficheCarte(const Carte& carte) const;
 
     void partieFinie();
-    void partieGagnee();
-    void partiePerdue();
+    void partieGagnee(std::string nomJoueur);
+    void partiePerdue(std::string nomJoueur);
 
     void effacerEcran() const;
     void temporiseAffichage() const;

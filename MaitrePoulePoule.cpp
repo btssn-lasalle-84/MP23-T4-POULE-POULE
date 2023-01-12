@@ -44,7 +44,7 @@ void MaitrePoulePoule::jouePartie()
 
     //@TODO boucle
 
-    monIHM->afficheMenu();
+    monIHM->afficheMenu(monJoueur->getNomJoueur());
 
     unsigned int choixJoueur = monIHM->entreChoixJoueur();
     monJoueur->setChoixJoueur(choixJoueur);
@@ -87,11 +87,11 @@ void MaitrePoulePoule::deroulePartie()
     monJoueur->setReponseNbOeuf(reponseNbOeuf);
     if(verifieReponseJoueur())
     {
-        monIHM->partieGagnee();
+        monIHM->partieGagnee(monJoueur->getNomJoueur());
     }
     else
     {
-        monIHM->partiePerdue();
+        monIHM->partiePerdue(monJoueur->getNomJoueur());
     }
 }
 

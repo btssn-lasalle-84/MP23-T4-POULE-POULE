@@ -10,6 +10,8 @@ std::string IHM::entreNomJoueur() const
     std::cout << "Pour commencer, veuillez entrer votre prénom : ";
     std::string nomJoueur;
     std::cin >> nomJoueur;
+    temporiseAffichage();
+    effacerEcran();
     return nomJoueur;
 }
 
@@ -28,9 +30,10 @@ unsigned int IHM::entreReponseNbOeufs() const
     return reponseNbOeuf;
 }
 
-void IHM::afficheMenu() const
+void IHM::afficheMenu(std::string nomJoueur) const
 {
-    std::cout << "Bienvenue sur le jeu du Poule-Poule !" << std::endl;
+    std::cout << "Bienvenue " << nomJoueur << " sur le jeu du Poule-Poule !"
+              << std::endl;
     std::cout << "[1] Commencer une partie" << std::endl;
     std::cout << "[2] Règles du jeu" << std::endl;
 }
@@ -95,10 +98,16 @@ void IHM::afficheCarte(const Carte& carte) const
             break;
         case Carte::ValeurCarte::Poule:
             std::cout << R"(
-             ________________________________________
+             ________________________________________  
             |                                        |
             |           ,~.                          |
-            |        ,-'__ `-,       `~.      /      |
+            |        ,-'__ `-,                       |
+            |       {,-'  `. }              ,')      |
+            |      ,( a )   `-.__         ,',')~,    |
+            |     <=.) (         `-.__,==' ' ' '}    |
+            |       (   )                      /     |
+            |        `-'\   ,                  )     |
+            |            |  \        `~.      /      |
             |            \   `._        \    /       |
             |             \     `._____,'   /        |
             |              `-.            ,'         |
@@ -138,8 +147,7 @@ void IHM::afficheCarte(const Carte& carte) const
             sleep(TEMPS_DISTRIBUTION_CARTE);
             break;
         case Carte::ValeurCarte::Coq:
-            std::cout << "coq" << '\n';
-            /*std::cout << R"(
+            std::cout << R"(
              ________________________________________
             |                                        |
             |                                        |
@@ -149,7 +157,7 @@ void IHM::afficheCarte(const Carte& carte) const
             |     ) o~`,         ~-.~-.~-.~-.~-.~-.  |
             |     (/    \      ~-.~-.~-.~-.~-.~-.~-. |
             |      :    \    ~-.~-.~-.~-.~-.~-.~-.   |
-            |     :     {_.~-.~-.~-.~-.~-.~-.~       |
+            |     :     (_.~-.~-.~-.~-.~-.~-.~       |
             |    ::  .-~`    ~-.~-.~-.~-.~-.         |
             |   :.: :'    ._   ~-.~-.~-.~-.~-        |
             |    :::`-.    '-._  ~-.~-.~-.~-         |
@@ -160,7 +168,7 @@ void IHM::afficheCarte(const Carte& carte) const
             |           / |                          |
             |         ~` ~"'                         |
             |________________________________________|
-                                            )" << '\n';*/
+                                            )" << '\n';
             sleep(TEMPS_DISTRIBUTION_CARTE);
             break;
         default:
@@ -177,14 +185,15 @@ void IHM::partieFinie()
     std::cout << "Saisissez le nombre d'oeufs que vous pensez avoir compter : ";
 }
 
-void IHM::partieGagnee()
+void IHM::partieGagnee(std::string nomJoueur)
 {
-    std::cout << "Bravo ! Vous avez gagné la manche !" << std::endl;
+    std::cout << "Bravo " << nomJoueur << " ! Vous avez gagné la manche !"
+              << std::endl;
 }
 
-void IHM::partiePerdue()
+void IHM::partiePerdue(std::string nomJoueur)
 {
-    std::cout << "Perdu... dommage..." << std::endl;
+    std::cout << "Perdu... dommage... " << nomJoueur << std::endl;
 }
 
 void IHM::effacerEcran() const
