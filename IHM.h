@@ -15,14 +15,20 @@ class IHM
 
   public:
     std::string  entreNomJoueur() const;
-    void         afficheMenu() const;
     unsigned int entreChoixJoueur() const;
-    void         afficheRegles() const;
-    void         afficheCarte(const Carte& carte) const;
-    void         finManche();
     unsigned int entreReponseNbOeufs() const;
-    void         gagnePartie();
-    void         perduPartie();
+
+    void afficheMenu() const;
+    void afficheRegles() const;
+    void afficheCarte(const Carte& carte) const;
+
+    void partieFinie();
+    void partieGagnee();
+    void partiePerdue();
+
+    void effacerEcran() const;
+    void temporiseAffichage() const;
+    void temporiseCarte() const;
 };
 
 #endif // IHM_H

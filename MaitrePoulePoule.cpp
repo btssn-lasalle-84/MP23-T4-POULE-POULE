@@ -13,15 +13,13 @@
 #endif
 
 MaitrePoulePoule::MaitrePoulePoule() :
-    monJoueur(new Joueur), monIHM(new IHM), nbPointJoueur(0), compteurOeuf(0),
-    compteurOeufCouve(0)
+    monJoueur(new Joueur), monIHM(new IHM), nbPointsJoueur(0), compteurOeufs(0),
+    compteurOeufsCouves(0)
 {
 #ifdef DEBUG_MAITREPOULEPOULE
     std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] " << this
               << std::endl;
 #endif
-    creePaquetCartes();
-    melangePaquet();
 }
 
 MaitrePoulePoule::~MaitrePoulePoule()
@@ -44,95 +42,78 @@ void MaitrePoulePoule::jouePartie()
               << "nomJoueur = " << monJoueur->getNomJoueur() << std::endl;
 #endif
 
+    //@TODO boucle
+
     monIHM->afficheMenu();
-    deroulePartie();
-}
 
-void MaitrePoulePoule::melangePaquet()
-{
-    std::srand(unsigned(std::time(0)));
-    std::random_shuffle(paquetCartes.begin(), paquetCartes.end());
-}
+    unsigned int choixJoueur = monIHM->entreChoixJoueur();
+    monJoueur->setChoixJoueur(choixJoueur);
 
-void MaitrePoulePoule::distribueCartes()
-{
-    for(unsigned int i = 0; i < paquetCartes.size(); i++)
+#ifdef DEBUG_MAITREPOULEPOULE
+    std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] "
+              << "choixJoueur = " << monJoueur->getChoixJoueur() << std::endl;
+#endif
+
+    monIHM->effacerEcran();
+    switch(monJoueur->getChoixJoueur())
     {
-        monIHM->afficheCarte(paquetCartes[i]);
-        compteNbOeuf(paquetCartes[i]);
+        case JOUE_PARTIE:
+            deroulePartie();
+            break;
+        case REGLES:
+            monIHM->afficheRegles();
+            break;
+        default:
+            break;
     }
+}
+
+void MaitrePoulePoule::reinitialiseCompteurs()
+{
+    nbPointsJoueur      = 0;
+    compteurOeufs       = 0;
+    compteurOeufsCouves = 0;
 }
 
 void MaitrePoulePoule::deroulePartie()
 {
-    unsigned int choixJoueur = monIHM->entreChoixJoueur();
-    monJoueur->setChoixJoueur(choixJoueur);
+    creePaquetCartes();
+    melangePaquet();
+    reinitialiseCompteurs();
+    distribueCartes();
 
-    if(monJoueur->getChoixJoueur() == 1)
-    {
-        system("clear");
-        distribueCartes();
-    }
-    else if(monJoueur->getChoixJoueur() == 2)
-    {
-        system("clear");
-        monIHM->afficheRegles();
-    }
-    else
-    {
-#ifdef DEBUG_MAITREPOULEPOULE
-        std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] "
-                  << "choixJoueur = " << monJoueur->getChoixJoueur()
-                  << std::endl;
-#endif
-        sleep(2);
-        system("clear");
-        jouePartie();
-    }
-}
-
-void MaitrePoulePoule::compteNbOeuf(const Carte& carte)
-{
-    switch(carte.getValeurCarte())
-    {
-        case Carte::ValeurCarte::Oeuf:
-            compteurOeuf = compteurOeuf + 1;
-
-            break;
-
-        case Carte::ValeurCarte::Poule:
-            compteurOeuf      = compteurOeuf - 1;
-            compteurOeufCouve = compteurOeufCouve + 1;
-
-            break;
-
-        case Carte::ValeurCarte::Renard:
-            compteurOeufCouve = compteurOeufCouve - 1;
-            compteurOeuf      = compteurOeuf + 1;
-
-            break;
-
-        case Carte::ValeurCarte::Coq:
-            monIHM->finManche();
-            monIHM->entreReponseNbOeufs();
-            verifieReponseJoueur();
-            break;
-    }
-}
-
-void MaitrePoulePoule::verifieReponseJoueur()
-{
+    monIHM->partieFinie();
     unsigned int reponseNbOeuf = monIHM->entreReponseNbOeufs();
     monJoueur->setReponseNbOeuf(reponseNbOeuf);
-
-    if(monJoueur->getReponseNbOeuf() == reponseNbOeuf)
+    if(verifieReponseJoueur())
     {
-        monIHM->gagnePartie();
+        monIHM->partieGagnee();
     }
     else
     {
-        monIHM->perduPartie();
+        monIHM->partiePerdue();
     }
+}
+
+void MaitrePoulePoule::distribueCartes()
+{
+    for(unsigned int numeroCarte = 0;
+        numeroCarte < paquetCartes.size() &&
+        !estPartieFinie(paquetCartes[numeroCarte]);
+        numeroCarte++)
+    {
+        monIHM->afficheCarte(paquetCartes[numeroCarte]);
+        compteNbOeuf(paquetCartes[numeroCarte]);
+#ifdef DEBUG_MAITREPOULEPOULE
+        std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] "
+                  << "numeroCarte = " << numeroCarte << std::endl;
+#endif
+    }
+}
+
+bool MaitrePoulePoule::estPartieFinie(const Carte& carte) const
+{
+    return (carte.getValeurCarte() == Carte::ValeurCarte::Coq);
 }
 
 std::vector<Carte> MaitrePoulePoule::creeCartesOeuf()
@@ -197,4 +178,58 @@ void MaitrePoulePoule::creePaquetCartes()
                         cartesRenard.begin(),
                         cartesRenard.end());
     paquetCartes.insert(paquetCartes.end(), cartesCoq.begin(), cartesCoq.end());
+}
+
+void MaitrePoulePoule::melangePaquet()
+{
+    std::srand(unsigned(std::time(0)));
+    std::random_shuffle(paquetCartes.begin(), paquetCartes.end());
+}
+
+void MaitrePoulePoule::compteNbOeuf(const Carte& carte)
+{
+    switch(carte.getValeurCarte())
+    {
+        case Carte::ValeurCarte::Oeuf:
+            compteurOeufs = compteurOeufs + 1;
+            break;
+        case Carte::ValeurCarte::Poule:
+            // si il y a un oeuf
+            compteurOeufs       = compteurOeufs - 1;
+            compteurOeufsCouves = compteurOeufsCouves + 1;
+            // finsi
+            break;
+        case Carte::ValeurCarte::Renard:
+            // si ...
+            compteurOeufsCouves = compteurOeufsCouves - 1;
+            compteurOeufs       = compteurOeufs + 1;
+            // fin si
+            break;
+        case Carte::ValeurCarte::Coq:
+            break;
+        default:
+#ifdef DEBUG_MAITREPOULEPOULE
+            std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] "
+                      << "carte inconnue !!!" << std::endl;
+#endif
+    }
+#ifdef DEBUG_MAITREPOULEPOULE
+    std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] "
+              << "carte.getValeurCarte() = " << carte.getValeurCarte()
+              << std::endl;
+    std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] "
+              << "compteurOeuf = " << compteurOeufs << std::endl;
+#endif
+}
+
+bool MaitrePoulePoule::verifieReponseJoueur() const
+{
+    if(monJoueur->getReponseNbOeuf() == compteurOeufs)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
