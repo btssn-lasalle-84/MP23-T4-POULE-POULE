@@ -8,13 +8,19 @@ class Joueur
   private:
     std::string  nomJoueur;
     unsigned int choixJoueur;
+    unsigned int reponseNbOeuf;
 
   public:
     Joueur();
-    Joueur(std::string nomJoueur, unsigned int choixJoueur);
+    Joueur(std::string  nomJoueur,
+           unsigned int choixJoueur,
+           unsigned int reponseNbOeuf);
     std::string  getNomJoueur() const;
     void         setNomJoueur(std::string nomJoueur);
     unsigned int getChoixJoueur() const;
     void         setChoixJoueur(unsigned int choixJoueur);
+    unsigned int getReponseNbOeuf() const;
+    void         setReponseNbOeuf(unsigned int reponseNbOeuf);
 };
+
 #endif // JOUEUR_H
