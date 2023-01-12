@@ -59,6 +59,7 @@ void IHM::afficheRegles() const
 
 void IHM::afficheCarte(const Carte& carte) const
 {
+    system("clear");
     switch(carte.getValeurCarte())
     {
         case Carte::ValeurCarte::Oeuf:
@@ -85,7 +86,7 @@ void IHM::afficheCarte(const Carte& carte) const
                     |________________________________________|
                                                     )" << '\n';
                     sleep(TEMPS_DISTRIBUTION_CARTE);
-                    system("clear");
+                    
                     break;
 
         case Carte::ValeurCarte::Poule:
@@ -112,7 +113,7 @@ void IHM::afficheCarte(const Carte& carte) const
                     |________________________________________|
                                                     )" << '\n';
                     sleep(TEMPS_DISTRIBUTION_CARTE);
-                    system("clear");
+                    
                     break;
 
         case Carte::ValeurCarte::Renard:
@@ -139,8 +140,10 @@ void IHM::afficheCarte(const Carte& carte) const
                     |________________________________________|
                                                     )" << '\n';
                     sleep(TEMPS_DISTRIBUTION_CARTE);
-        system("clear");
-        break;
+                    
+                    break;
+        
+        
 
         case Carte::ValeurCarte::Coq:
                     std::cout << R"(
@@ -166,9 +169,36 @@ void IHM::afficheCarte(const Carte& carte) const
                     |________________________________________|
                                                     )" << '\n';
                     sleep(TEMPS_DISTRIBUTION_CARTE);
-                system("clear");
+                
                 break;
+
                 default:
                     break;
     }
     }
+
+void IHM::finManche()
+{
+    sleep(2);
+    system("clear");
+
+    std::cout << "Manche finie !" << std::endl;
+    std::cout << "Saisissez le nombre d'oeufs que vous pensez avoir compter : ";
+}
+
+unsigned int IHM::entreReponseNbOeufs() const
+{
+    unsigned int reponseNbOeuf;
+    std::cin >> reponseNbOeuf;
+    return reponseNbOeuf;
+}
+
+void IHM::gagnePartie()
+{
+    std::cout << "Bravo ! Vous avez gagné la manche !" << std::endl;
+}
+
+void IHM::perduPartie()
+{
+    std::cout << "Perdu... dommage..." << std::endl;
+}

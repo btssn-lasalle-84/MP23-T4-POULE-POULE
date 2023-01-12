@@ -19,6 +19,10 @@ class IHM
     unsigned int entreChoixJoueur() const;
     void         afficheRegles() const;
     void         afficheCarte(const Carte& carte) const;
+    void         finManche();
+    unsigned int entreReponseNbOeufs() const;
+    void         gagnePartie();
+    void         perduPartie();
 };
 
 #endif // IHM_H
