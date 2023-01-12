@@ -40,7 +40,7 @@ void IHM::afficheMenu(std::string nomJoueur) const
 
 void IHM::afficheRegles() const
 {
-    std::cout << "Voici les règles" << std::endl;
+    std::cout << "Voici les règles :" << std::endl;
     std::cout << "Tout d’abord, l’ordinateur sera le réalisateur, le Maître "
                  "Poule Poule (MPP)."
               << std::endl;
@@ -61,10 +61,10 @@ void IHM::afficheRegles() const
     std::cout << "Le Renard chasse une Poule arrivée à n'importe quel "
                  "moment de la "
                  "partie."
+              << std::endl
               << std::endl;
 
-    std::cout << "Appuyez sur [1] afin de revenir au menu principal"
-              << std::endl;
+    std::cout << "Appuyez sur [1] pour lancer la partie." << std::endl;
 }
 
 void IHM::afficheCarte(const Carte& carte) const
@@ -94,11 +94,11 @@ void IHM::afficheCarte(const Carte& carte) const
             |                                        |
             |________________________________________|
                                             )" << '\n';
-            sleep(TEMPS_DISTRIBUTION_CARTE);
+            temporiseCarte();
             break;
         case Carte::ValeurCarte::Poule:
             std::cout << R"(
-             ________________________________________  
+             ________________________________________
             |                                        |
             |           ,~.                          |
             |        ,-'__ `-,                       |
@@ -119,7 +119,7 @@ void IHM::afficheCarte(const Carte& carte) const
             |                  '                     |
             |________________________________________|
                                             )" << '\n';
-            sleep(TEMPS_DISTRIBUTION_CARTE);
+            temporiseCarte();
             break;
         case Carte::ValeurCarte::Renard:
             std::cout << R"(
@@ -144,7 +144,7 @@ void IHM::afficheCarte(const Carte& carte) const
             |           `-../____,..---'`            |
             |________________________________________|
                                             )" << '\n';
-            sleep(TEMPS_DISTRIBUTION_CARTE);
+            temporiseCarte();
             break;
         case Carte::ValeurCarte::Coq:
             std::cout << R"(
@@ -169,11 +169,16 @@ void IHM::afficheCarte(const Carte& carte) const
             |         ~` ~"'                         |
             |________________________________________|
                                             )" << '\n';
-            sleep(TEMPS_DISTRIBUTION_CARTE);
+            temporiseCarte();
             break;
         default:
             break;
     }
+}
+
+void IHM::afficheMessageDebutPartie() const
+{
+    std::cout << "La partie va débuter...";
 }
 
 void IHM::filmFini()
@@ -191,9 +196,11 @@ void IHM::partieGagnee(std::string nomJoueur)
               << std::endl;
 }
 
-void IHM::partiePerdue(std::string nomJoueur)
+void IHM::partiePerdue(std::string nomJoueur, unsigned int compteurOeufs)
 {
-    std::cout << "Perdu... dommage... " << nomJoueur << std::endl;
+    std::cout << "Dommage " << nomJoueur << " tu as perdu ... " << std::endl;
+    std::cout << "Le nombre d'oeuf(s) était de ";
+    std::cout << compteurOeufs << std::endl;
 }
 
 void IHM::effaceEcran() const

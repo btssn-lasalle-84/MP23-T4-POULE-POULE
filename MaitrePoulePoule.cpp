@@ -42,8 +42,6 @@ void MaitrePoulePoule::jouePartie()
               << "nomJoueur = " << monJoueur->getNomJoueur() << std::endl;
 #endif
 
-    //@TODO boucle
-
     monIHM->afficheMenu(monJoueur->getNomJoueur());
 
     unsigned int choixJoueur = monIHM->entreChoixJoueur();
@@ -58,14 +56,39 @@ void MaitrePoulePoule::jouePartie()
     switch(monJoueur->getChoixJoueur())
     {
         case JOUE_PARTIE:
+            monIHM->effaceEcran();
+            monIHM->afficheMessageDebutPartie();
             derouleFilm();
             break;
         case REGLES:
             monIHM->afficheRegles();
+            do
+            {
+                unsigned int choixJoueur = monIHM->entreChoixJoueur();
+                monJoueur->setChoixJoueur(choixJoueur);
+                if(monJoueur->getChoixJoueur() == 1)
+                {
+                    monIHM->effaceEcran();
+                    monIHM->afficheMessageDebutPartie();
+                    derouleFilm();
+                }
+
+            } while(monJoueur->getChoixJoueur() != 1);
+
             break;
         default:
             break;
     }
+}
+
+unsigned int MaitrePoulePoule::getCompteurOeufs() const
+{
+    return compteurOeufs;
+}
+
+void MaitrePoulePoule::setCompteurOeufs(unsigned int compteurOeufs)
+{
+    this->compteurOeufs = compteurOeufs;
 }
 
 void MaitrePoulePoule::reinitialiseCompteurs()
@@ -91,7 +114,7 @@ void MaitrePoulePoule::derouleFilm()
     }
     else
     {
-        monIHM->partiePerdue(monJoueur->getNomJoueur());
+        monIHM->partiePerdue(monJoueur->getNomJoueur(), getCompteurOeufs());
     }
 }
 
@@ -102,11 +125,11 @@ void MaitrePoulePoule::distribueCartes()
         !estPartieFinie(paquetCartes[numeroCarte]);
         numeroCarte++)
     {
-        monIHM->afficheCarte(paquetCartes[numeroCarte]);
-        compteNbOeufs(paquetCartes[numeroCarte]);
+        monIHM->afficheCarte(paquetCartes[numeroCarte + 1]);
+        compteNbOeufs(paquetCartes[numeroCarte + 1]);
 #ifdef DEBUG_MAITREPOULEPOULE
         std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] "
-                  << "numeroCarte = " << numeroCarte << std::endl;
+                  << "numeroCarte = " << numeroCarte + 1 << std::endl;
 #endif
     }
 }
@@ -194,20 +217,23 @@ void MaitrePoulePoule::compteNbOeufs(const Carte& carte)
             compteurOeufs = compteurOeufs + 1;
             break;
         case Carte::ValeurCarte::Poule:
-            // si il y a un oeuf
-            compteurOeufs       = compteurOeufs - 1;
-            compteurOeufsCouves = compteurOeufsCouves + 1;
-            // finsi
+            if(compteurOeufs >= 1)
+            {
+                compteurOeufs       = compteurOeufs - 1;
+                compteurOeufsCouves = compteurOeufsCouves + 1;
+            }
             break;
         case Carte::ValeurCarte::Renard:
-            // si ...
-            compteurOeufsCouves = compteurOeufsCouves - 1;
-            compteurOeufs       = compteurOeufs + 1;
-            // fin si
+            if(compteurOeufsCouves >= 1)
+            {
+                compteurOeufsCouves = compteurOeufsCouves - 1;
+                compteurOeufs       = compteurOeufs + 1;
+            }
             break;
         case Carte::ValeurCarte::Coq:
             break;
         default:
+            break;
 #ifdef DEBUG_MAITREPOULEPOULE
             std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] "
                       << "carte inconnue !!!" << std::endl;
@@ -218,7 +244,7 @@ void MaitrePoulePoule::compteNbOeufs(const Carte& carte)
               << "carte.getValeurCarte() = " << carte.getValeurCarte()
               << std::endl;
     std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] "
-              << "compteurOeuf = " << compteurOeufs << std::endl;
+              << "compteurOeufs = " << compteurOeufs << std::endl;
 #endif
 }
 
