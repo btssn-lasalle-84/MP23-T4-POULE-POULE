@@ -13,7 +13,8 @@
 #endif
 
 MaitrePoulePoule::MaitrePoulePoule() :
-    monJoueur(new Joueur), monIHM(new IHM), nbPointJoueur(0)
+    monJoueur(new Joueur), monIHM(new IHM), nbPointJoueur(0), compteurOeuf(0),
+    compteurOeufCouve(0)
 {
 #ifdef DEBUG_MAITREPOULEPOULE
     std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] " << this
@@ -58,6 +59,7 @@ void MaitrePoulePoule::distribueCartes()
     for(unsigned int i = 0; i < paquetCartes.size(); i++)
     {
         monIHM->afficheCarte(paquetCartes[i]);
+        compteNbOeuf(paquetCartes[i]);
     }
 }
 
@@ -86,6 +88,50 @@ void MaitrePoulePoule::deroulePartie()
         sleep(2);
         system("clear");
         jouePartie();
+    }
+}
+
+void MaitrePoulePoule::compteNbOeuf(const Carte& carte)
+{
+    switch(carte.getValeurCarte())
+    {
+        case Carte::ValeurCarte::Oeuf:
+            compteurOeuf = compteurOeuf + 1;
+
+            break;
+
+        case Carte::ValeurCarte::Poule:
+            compteurOeuf      = compteurOeuf - 1;
+            compteurOeufCouve = compteurOeufCouve + 1;
+
+            break;
+
+        case Carte::ValeurCarte::Renard:
+            compteurOeufCouve = compteurOeufCouve - 1;
+            compteurOeuf      = compteurOeuf + 1;
+
+            break;
+
+        case Carte::ValeurCarte::Coq:
+            monIHM->finManche();
+            monIHM->entreReponseNbOeufs();
+            verifieReponseJoueur();
+            break;
+    }
+}
+
+void MaitrePoulePoule::verifieReponseJoueur()
+{
+    unsigned int reponseNbOeuf = monIHM->entreReponseNbOeufs();
+    monJoueur->setReponseNbOeuf(reponseNbOeuf);
+
+    if(monJoueur->getReponseNbOeuf() == reponseNbOeuf)
+    {
+        monIHM->gagnePartie();
+    }
+    else
+    {
+        monIHM->perduPartie();
     }
 }
 
