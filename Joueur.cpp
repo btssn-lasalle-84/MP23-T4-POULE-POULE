@@ -5,8 +5,11 @@ Joueur::Joueur() : nomJoueur("")
 {
 }
 
-Joueur::Joueur(std::string nomJoueur, unsigned int choixJoueur) :
-    nomJoueur(nomJoueur), choixJoueur(choixJoueur)
+Joueur::Joueur(std::string  nomJoueur,
+               unsigned int choixJoueur,
+               unsigned int reponseNbOeuf) :
+    nomJoueur(nomJoueur),
+    choixJoueur(choixJoueur), reponseNbOeuf(reponseNbOeuf)
 {
 }
 
@@ -28,4 +31,14 @@ unsigned int Joueur::getChoixJoueur() const
 void Joueur::setChoixJoueur(unsigned int choixJoueur)
 {
     this->choixJoueur = choixJoueur;
+}
+
+unsigned int Joueur::getReponseNbOeuf() const
+{
+    return reponseNbOeuf;
+}
+
+void Joueur::setReponseNbOeuf(unsigned int reponseNbOeuf)
+{
+    this->reponseNbOeuf = reponseNbOeuf;
 }
