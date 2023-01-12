@@ -30,14 +30,14 @@ de bon, il faut reconstituer le film au plus vite !
 
 Dans la version 2.0, il sera possible en plus de :
 
-🟥 Jouer une partie composée de plusieurs manches.
-🟥 Afficher le déroulement d'une partie.
-🟥 Intégrer de nouveaux acteurs.
+🟥 Jouer une partie composée de plusieurs manches.  
+🟥 Afficher le déroulement d'une partie.  
+🟥 Intégrer de nouveaux acteurs.  
 
 Dans la version 3.0, il sera possible en plus de :
 
-🟥 Choisir un niveau de difficulté (durée d’affichage, nombre de cartes dans le paquet, ...).
-🟥 Intégrer d’autres acteurs.
+🟥 Choisir un niveau de difficulté (durée d’affichage, nombre de cartes dans le paquet, ...).  
+🟥 Intégrer d’autres acteurs.  
 
 ## Ressources logicielles
 
