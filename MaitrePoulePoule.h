@@ -5,7 +5,7 @@
 #include <vector>
 #include "Carte.h"
 
-#define DEBUG_MAITREPOULEPOULE
+//#define DEBUG_MAITREPOULEPOULE
 
 // Choix de menu
 #define JOUE_PARTIE 1
@@ -41,7 +41,9 @@ class MaitrePoulePoule
   public:
     MaitrePoulePoule();
     ~MaitrePoulePoule();
-    void jouePartie();
+    void         jouePartie();
+    unsigned int getCompteurOeufs() const;
+    void         setCompteurOeufs(unsigned int compteurOeufs);
 };
 
 #endif
