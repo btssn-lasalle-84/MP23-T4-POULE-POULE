@@ -54,11 +54,11 @@ void MaitrePoulePoule::jouePartie()
               << "choixJoueur = " << monJoueur->getChoixJoueur() << std::endl;
 #endif
 
-    monIHM->effacerEcran();
+    monIHM->effaceEcran();
     switch(monJoueur->getChoixJoueur())
     {
         case JOUE_PARTIE:
-            deroulePartie();
+            derouleFilm();
             break;
         case REGLES:
             monIHM->afficheRegles();
@@ -75,14 +75,14 @@ void MaitrePoulePoule::reinitialiseCompteurs()
     compteurOeufsCouves = 0;
 }
 
-void MaitrePoulePoule::deroulePartie()
+void MaitrePoulePoule::derouleFilm()
 {
     creePaquetCartes();
     melangePaquet();
     reinitialiseCompteurs();
     distribueCartes();
 
-    monIHM->partieFinie();
+    monIHM->filmFini();
     unsigned int reponseNbOeuf = monIHM->entreReponseNbOeufs();
     monJoueur->setReponseNbOeuf(reponseNbOeuf);
     if(verifieReponseJoueur())
@@ -103,7 +103,7 @@ void MaitrePoulePoule::distribueCartes()
         numeroCarte++)
     {
         monIHM->afficheCarte(paquetCartes[numeroCarte]);
-        compteNbOeuf(paquetCartes[numeroCarte]);
+        compteNbOeufs(paquetCartes[numeroCarte]);
 #ifdef DEBUG_MAITREPOULEPOULE
         std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] "
                   << "numeroCarte = " << numeroCarte << std::endl;
@@ -186,7 +186,7 @@ void MaitrePoulePoule::melangePaquet()
     std::random_shuffle(paquetCartes.begin(), paquetCartes.end());
 }
 
-void MaitrePoulePoule::compteNbOeuf(const Carte& carte)
+void MaitrePoulePoule::compteNbOeufs(const Carte& carte)
 {
     switch(carte.getValeurCarte())
     {
