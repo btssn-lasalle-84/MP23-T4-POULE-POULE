@@ -7,6 +7,10 @@
 
 #define DEBUG_MAITREPOULEPOULE
 
+// Choix de menu
+#define JOUE_PARTIE 1
+#define REGLES      2
+
 class Carte;
 class Joueur;
 class IHM;
@@ -17,24 +21,27 @@ class MaitrePoulePoule
     Joueur*            monJoueur;
     IHM*               monIHM;
     std::vector<Carte> paquetCartes;
-    unsigned int       nbPointJoueur;
-    unsigned int       compteurOeuf;
-    unsigned int       compteurOeufCouve;
+    unsigned int       nbPointsJoueur;
+    unsigned int       compteurOeufs;
+    unsigned int       compteurOeufsCouves;
 
-  public:
-    MaitrePoulePoule();
-    ~MaitrePoulePoule();
-    void               jouePartie();
-    void               melangePaquet();
-    void               distribueCartes();
     void               deroulePartie();
-    void               compteNbOeuf(const Carte& carte);
-    void               verifieReponseJoueur();
+    void               reinitialiseCompteurs();
+    void               distribueCartes();
+    bool               estPartieFinie(const Carte& carte) const;
     std::vector<Carte> creeCartesOeuf();
     std::vector<Carte> creeCartesPoule();
     std::vector<Carte> creeCartesRenard();
     std::vector<Carte> creeCartesCOQ();
     void               creePaquetCartes();
+    void               melangePaquet();
+    void               compteNbOeuf(const Carte& carte);
+    bool               verifieReponseJoueur() const;
+
+  public:
+    MaitrePoulePoule();
+    ~MaitrePoulePoule();
+    void jouePartie();
 };
 
 #endif

@@ -13,19 +13,26 @@ std::string IHM::entreNomJoueur() const
     return nomJoueur;
 }
 
-void IHM::afficheMenu() const
-{
-    std::cout << "Bienvenue sur le jeu du Poule-Poule !" << std::endl;
-    std::cout << "[1] Commencer une partie" << std::endl;
-    std::cout << "[2] Règles du jeu" << std::endl;
-}
-
 unsigned int IHM::entreChoixJoueur() const
 {
     std::cout << "Entrez votre réponse : ";
     unsigned int choixJoueur;
     std::cin >> choixJoueur;
     return choixJoueur;
+}
+
+unsigned int IHM::entreReponseNbOeufs() const
+{
+    unsigned int reponseNbOeuf;
+    std::cin >> reponseNbOeuf;
+    return reponseNbOeuf;
+}
+
+void IHM::afficheMenu() const
+{
+    std::cout << "Bienvenue sur le jeu du Poule-Poule !" << std::endl;
+    std::cout << "[1] Commencer une partie" << std::endl;
+    std::cout << "[2] Règles du jeu" << std::endl;
 }
 
 void IHM::afficheRegles() const
@@ -59,146 +66,138 @@ void IHM::afficheRegles() const
 
 void IHM::afficheCarte(const Carte& carte) const
 {
-    system("clear");
     switch(carte.getValeurCarte())
     {
         case Carte::ValeurCarte::Oeuf:
-                    std::cout << R"(
-                     ________________________________________
-                    |                                        |
-                    |                ████████                |
-                    |              ██        ██              |
-                    |            ██▒▒▒▒        ██            |
-                    |          ██▒▒▒▒▒▒      ▒▒▒▒██          |
-                    |          ██▒▒▒▒▒▒      ▒▒▒▒██          |
-                    |        ██  ▒▒▒▒        ▒▒▒▒▒▒██        |
-                    |        ██                ▒▒▒▒██        |
-                    |      ██▒▒      ▒▒▒▒▒▒          ██      |
-                    |      ██      ▒▒▒▒▒▒▒▒▒▒        ██      |
-                    |      ██      ▒▒▒▒▒▒▒▒▒▒    ▒▒▒▒██      |
-                    |      ██▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒██      |
-                    |        ██▒▒▒▒  ▒▒▒▒▒▒    ▒▒▒▒██        |
-                    |        ██▒▒▒▒            ▒▒▒▒██        |
-                    |          ██▒▒              ██          |
-                    |            ████        ████            |
-                    |                ████████                |
-                    |                                        |
-                    |________________________________________|
-                                                    )" << '\n';
-                    sleep(TEMPS_DISTRIBUTION_CARTE);
-                    
-                    break;
-
+            std::cout << R"(
+             ________________________________________
+            |                                        |
+            |                ████████                |
+            |              ██        ██              |
+            |            ██▒▒▒▒        ██            |
+            |          ██▒▒▒▒▒▒      ▒▒▒▒██          |
+            |          ██▒▒▒▒▒▒      ▒▒▒▒██          |
+            |        ██  ▒▒▒▒        ▒▒▒▒▒▒██        |
+            |        ██                ▒▒▒▒██        |
+            |      ██▒▒      ▒▒▒▒▒▒          ██      |
+            |      ██      ▒▒▒▒▒▒▒▒▒▒        ██      |
+            |      ██      ▒▒▒▒▒▒▒▒▒▒    ▒▒▒▒██      |
+            |      ██▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒██      |
+            |        ██▒▒▒▒  ▒▒▒▒▒▒    ▒▒▒▒██        |
+            |        ██▒▒▒▒            ▒▒▒▒██        |
+            |          ██▒▒              ██          |
+            |            ████        ████            |
+            |                ████████                |
+            |                                        |
+            |________________________________________|
+                                            )" << '\n';
+            sleep(TEMPS_DISTRIBUTION_CARTE);
+            break;
         case Carte::ValeurCarte::Poule:
-                    std::cout << R"(
-                     ________________________________________
-                    |                                        |
-                    |           ,~.                          |
-                    |        ,-'__ `-,                       |
-                    |       |,-'  `. |              ,')      |
-                    |      ,( a )   `-.__         ,',')~,    |
-                    |     <=.) (         `-.__,==' ' ' '|    |
-                    |       (   )                      /     |
-                    |        `-'\   ,                  )     |
-                    |            |  \        `~.      /      |
-                    |            \   `._        \    /       |
-                    |             \     `._____,'   /        |
-                    |              `-.            ,'         |
-                    |                 `-.      ,-'           |
-                    |                    `~~~~'              |
-                    |                    //_||               |
-                    |                 __//--'/`              |
-                    |               ,--'/`  '                |
-                    |                  '                     |
-                    |________________________________________|
-                                                    )" << '\n';
-                    sleep(TEMPS_DISTRIBUTION_CARTE);
-                    
-                    break;
-
+            std::cout << R"(
+             ________________________________________
+            |                                        |
+            |           ,~.                          |
+            |        ,-'__ `-,       `~.      /      |
+            |            \   `._        \    /       |
+            |             \     `._____,'   /        |
+            |              `-.            ,'         |
+            |                 `-.      ,-'           |
+            |                    `~~~~'              |
+            |                    //_||               |
+            |                 __//--'/`              |
+            |               ,--'/`  '                |
+            |                  '                     |
+            |________________________________________|
+                                            )" << '\n';
+            sleep(TEMPS_DISTRIBUTION_CARTE);
+            break;
         case Carte::ValeurCarte::Renard:
-        std::cout << R"(
-                     ________________________________________
-                    |                                        |
-                    |                                        |
-                    |            ,-.      .-,                |
-                    |            |-.\ __ /.-|                |
-                    |            \  `    `  /                |
-                    |            / _     _  \                |
-                    |            | _`q  p _ |                |
-                    |            '._=/  \=_.'                |
-                    |              (`\()/`)`\                |
-                    |              (      )  \               |
-                    |              |(    )    \              |
-                    |              \ '--'   .- \             |
-                    |              |-      /    \            |
-                    |              | | | | |     |           |
-                    |              | | |.|.,..__ |           |
-                    |            .-""|`         `|           |
-                    |           /    |           /           |
-                    |           `-../____,..---'`            |
-                    |________________________________________|
-                                                    )" << '\n';
-                    sleep(TEMPS_DISTRIBUTION_CARTE);
-                    
-                    break;
-        
-        
-
+            std::cout << R"(
+             ________________________________________
+            |                                        |
+            |                                        |
+            |            ,-.      .-,                |
+            |            |-.\ __ /.-|                |
+            |            \  `    `  /                |
+            |            / _     _  \                |
+            |            | _`q  p _ |                |
+            |            '._=/  \=_.'                |
+            |              (`\()/`)`\                |
+            |              (      )  \               |
+            |              |(    )    \              |
+            |              \ '--'   .- \             |
+            |              |-      /    \            |
+            |              | | | | |     |           |
+            |              | | |.|.,..__ |           |
+            |            .-""|`         `|           |
+            |           /    |           /           |
+            |           `-../____,..---'`            |
+            |________________________________________|
+                                            )" << '\n';
+            sleep(TEMPS_DISTRIBUTION_CARTE);
+            break;
         case Carte::ValeurCarte::Coq:
-                    std::cout << R"(
-                     ________________________________________
-                    |                                        |
-                    |                                        |
-                    |                        ~-.             |
-                    |      ,,,,            ~-.~-.~-          |
-                    |     (.../           ~-.~-.~-.~-.~-.    |
-                    |     ) o~`,         ~-.~-.~-.~-.~-.~-.  |
-                    |     (/    \      ~-.~-.~-.~-.~-.~-.~-. |
-                    |      :    \    ~-.~-.~-.~-.~-.~-.~-.   |
-                    |     :     {_.~-.~-.~-.~-.~-.~-.~       |
-                    |    ::  .-~`    ~-.~-.~-.~-.~-.         |
-                    |   :.: :'    ._   ~-.~-.~-.~-.~-        |
-                    |    :::`-.    '-._  ~-.~-.~-.~-         |
-                    |     :::. `-.    '-,~-.~-.~-.           |
-                    |      ':::::.`''-.-'                    |
-                    |        '::::::,:'                      |
-                    |           '||"                         |
-                    |           / |                          |
-                    |         ~` ~"'                         |
-                    |________________________________________|
-                                                    )" << '\n';
-                    sleep(TEMPS_DISTRIBUTION_CARTE);
-                
-                break;
-
-                default:
-                    break;
+            std::cout << "coq" << '\n';
+            /*std::cout << R"(
+             ________________________________________
+            |                                        |
+            |                                        |
+            |                        ~-.             |
+            |      ,,,,            ~-.~-.~-          |
+            |     (.../           ~-.~-.~-.~-.~-.    |
+            |     ) o~`,         ~-.~-.~-.~-.~-.~-.  |
+            |     (/    \      ~-.~-.~-.~-.~-.~-.~-. |
+            |      :    \    ~-.~-.~-.~-.~-.~-.~-.   |
+            |     :     {_.~-.~-.~-.~-.~-.~-.~       |
+            |    ::  .-~`    ~-.~-.~-.~-.~-.         |
+            |   :.: :'    ._   ~-.~-.~-.~-.~-        |
+            |    :::`-.    '-._  ~-.~-.~-.~-         |
+            |     :::. `-.    '-,~-.~-.~-.           |
+            |      ':::::.`''-.-'                    |
+            |        '::::::,:'                      |
+            |           '||"                         |
+            |           / |                          |
+            |         ~` ~"'                         |
+            |________________________________________|
+                                            )" << '\n';*/
+            sleep(TEMPS_DISTRIBUTION_CARTE);
+            break;
+        default:
+            break;
     }
-    }
+}
 
-void IHM::finManche()
+void IHM::partieFinie()
 {
-    sleep(2);
-    system("clear");
+    temporiseAffichage();
+    effacerEcran();
 
     std::cout << "Manche finie !" << std::endl;
     std::cout << "Saisissez le nombre d'oeufs que vous pensez avoir compter : ";
 }
 
-unsigned int IHM::entreReponseNbOeufs() const
-{
-    unsigned int reponseNbOeuf;
-    std::cin >> reponseNbOeuf;
-    return reponseNbOeuf;
-}
-
-void IHM::gagnePartie()
+void IHM::partieGagnee()
 {
     std::cout << "Bravo ! Vous avez gagné la manche !" << std::endl;
 }
 
-void IHM::perduPartie()
+void IHM::partiePerdue()
 {
     std::cout << "Perdu... dommage..." << std::endl;
+}
+
+void IHM::effacerEcran() const
+{
+    system("clear");
+}
+
+void IHM::temporiseCarte() const
+{
+    sleep(TEMPS_DISTRIBUTION_CARTE);
+}
+
+void IHM::temporiseAffichage() const
+{
+    sleep(2);
 }
