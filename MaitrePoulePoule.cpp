@@ -232,6 +232,8 @@ void MaitrePoulePoule::compteNbOeufs(const Carte& carte)
             break;
         case Carte::ValeurCarte::Coq:
             break;
+        case Carte::ValeurCarte::Canard:
+            break;
         default:
             break;
 #ifdef DEBUG_MAITREPOULEPOULE
