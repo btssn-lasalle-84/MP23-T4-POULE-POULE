@@ -169,12 +169,22 @@ std::vector<Carte> MaitrePoulePoule::creeCartesRenard()
     return cartes;
 }
 
-std::vector<Carte> MaitrePoulePoule::creeCartesCOQ()
+std::vector<Carte> MaitrePoulePoule::creeCartesCoq()
 {
     std::vector<Carte> cartes;
     for(int i = 0; i < NB_CARTES_COQ; i++)
     {
         cartes.emplace_back(Carte::ValeurCarte::Coq);
+    }
+    return cartes;
+}
+
+std::vector<Carte> MaitrePoulePoule::creeCartesCanard()
+{
+    std::vector<Carte> cartes;
+    for(int i = 0; i < NB_CARTES_CANARD; i++)
+    {
+        cartes.emplace_back(Carte::ValeurCarte::Canard);
     }
     return cartes;
 }
@@ -185,11 +195,13 @@ void MaitrePoulePoule::creePaquetCartes()
     std::vector<Carte> cartesPoule;
     std::vector<Carte> cartesRenard;
     std::vector<Carte> cartesCoq;
+    std::vector<Carte> cartesCanard;
 
     cartesOeuf   = creeCartesOeuf();
     cartesPoule  = creeCartesPoule();
     cartesRenard = creeCartesRenard();
-    cartesCoq    = creeCartesCOQ();
+    cartesCoq    = creeCartesCoq();
+    cartesCanard = creeCartesCanard();
 
     paquetCartes.insert(paquetCartes.end(),
                         cartesOeuf.begin(),
@@ -201,6 +213,9 @@ void MaitrePoulePoule::creePaquetCartes()
                         cartesRenard.begin(),
                         cartesRenard.end());
     paquetCartes.insert(paquetCartes.end(), cartesCoq.begin(), cartesCoq.end());
+    paquetCartes.insert(paquetCartes.end(),
+                        cartesCanard.begin(),
+                        cartesCanard.end());
 }
 
 void MaitrePoulePoule::melangePaquet()
