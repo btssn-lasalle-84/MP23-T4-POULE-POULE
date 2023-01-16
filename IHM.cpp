@@ -71,7 +71,7 @@ void IHM::afficheRegles() const
                  "d'oeufs que vous pensez avoir compter."
               << std::endl;
     std::cout << "Bonne chance !"
-              << std::endl;          
+              << std::endl          
               << std::endl;
 
     std::cout << "Appuyez sur [1] pour lancer la partie." << std::endl;
