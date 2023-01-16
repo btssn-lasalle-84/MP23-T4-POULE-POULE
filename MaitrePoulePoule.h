@@ -5,7 +5,7 @@
 #include <vector>
 #include "Carte.h"
 
-//#define DEBUG_MAITREPOULEPOULE
+#define DEBUG_MAITREPOULEPOULE
 
 // Choix de menu
 #define JOUE_PARTIE 1
@@ -24,6 +24,7 @@ class MaitrePoulePoule
     unsigned int       nbPointsJoueur;
     unsigned int       compteurOeufs;
     unsigned int       compteurOeufsCouves;
+    unsigned int       compteurVersDeTerre;
 
     void               derouleFilm();
     void               reinitialiseCompteurs();
@@ -34,6 +35,7 @@ class MaitrePoulePoule
     std::vector<Carte> creeCartesRenard();
     std::vector<Carte> creeCartesCoq();
     std::vector<Carte> creeCartesCanard();
+    std::vector<Carte> creeCartesVerDeTerre();
     void               creePaquetCartes();
     void               melangePaquet();
     void               compteNbOeufs(const Carte& carte);
