@@ -56,7 +56,7 @@ void IHM::afficheRegles() const
          "œufs, 10 Poules, 10 Renards, 2 canards, 2 vers de terre et 1 Coq."
       << std::endl;
     std::cout << "Il faut savoir qu'une Poule couve un oeuf arrivé à "
-                 "n' importe "
+                 "n'importe "
                  "quel moment de la partie."
               << std::endl;
     std::cout << "Le Renard chasse une Poule arrivée à n'importe quel "
