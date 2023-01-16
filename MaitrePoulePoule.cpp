@@ -210,11 +210,11 @@ void MaitrePoulePoule::creePaquetCartes()
     std::vector<Carte> cartesCanard;
     std::vector<Carte> cartesVerDeTerre;
 
-    cartesOeuf   = creeCartesOeuf();
-    cartesPoule  = creeCartesPoule();
-    cartesRenard = creeCartesRenard();
-    cartesCoq    = creeCartesCoq();
-    cartesCanard = creeCartesCanard();
+    cartesOeuf       = creeCartesOeuf();
+    cartesPoule      = creeCartesPoule();
+    cartesRenard     = creeCartesRenard();
+    cartesCoq        = creeCartesCoq();
+    cartesCanard     = creeCartesCanard();
     cartesVerDeTerre = creeCartesVerDeTerre();
 
     paquetCartes.insert(paquetCartes.end(),

@@ -48,12 +48,13 @@ void IHM::afficheRegles() const
                  "par une. Une "
                  "fois affichées, ces cartes composeront le Film."
               << std::endl;
-    std::cout << "Pendant ce temps, le joueur devra juste compter les "
-                 "œufs ! Pour "
-                 "une première partie, le paquet de cartes sera "
-                 "composé de : 15 "
-                 "œufs, 10 Poules, 10 Renards, 2 canards, 2 vers de terre et 1 Coq."
-              << std::endl;
+    std::cout
+      << "Pendant ce temps, le joueur devra juste compter les "
+         "œufs ! Pour "
+         "une première partie, le paquet de cartes sera "
+         "composé de : 15 "
+         "œufs, 10 Poules, 10 Renards, 2 canards, 2 vers de terre et 1 Coq."
+      << std::endl;
     std::cout << "Il faut savoir qu'une Poule couve un oeuf arrivé à "
                  "n' importe "
                  "quel moment de la partie."
@@ -62,17 +63,15 @@ void IHM::afficheRegles() const
                  "moment de la "
                  "partie."
               << std::endl;
-    std::cout << "Le Canard n'est que de passage dans le film."
-              << std::endl;
-    std::cout << "Le Ver de terre attirera la prochaine poule, par conséquent elle "
-                 "ne couvrira pas d'oeufs."
-              << std::endl;
+    std::cout << "Le Canard n'est que de passage dans le film." << std::endl;
+    std::cout
+      << "Le Ver de terre attirera la prochaine poule, par conséquent elle "
+         "ne couvrira pas d'oeufs."
+      << std::endl;
     std::cout << "Le Coq met fin à la partie et vous devrez donner le nombre "
                  "d'oeufs que vous pensez avoir compter."
               << std::endl;
-    std::cout << "Bonne chance !"
-              << std::endl          
-              << std::endl;
+    std::cout << "Bonne chance !" << std::endl << std::endl;
 
     std::cout << "Appuyez sur [1] pour lancer la partie." << std::endl;
 }
