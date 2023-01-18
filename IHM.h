@@ -4,7 +4,9 @@
 #include "Carte.h"
 #include <string>
 
-#define TEMPS_DISTRIBUTION_CARTE 2
+#define TEMPS_DISTRIBUTION_CARTE  2
+#define TEMPORISE_AFFICHAGE_COURT 1
+#define TEMPORISE_AFFICHAGE_MOYEN 2
 
 class MaitrePoulePoule;
 
