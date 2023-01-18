@@ -5,7 +5,7 @@
 #include <vector>
 #include "Carte.h"
 
-#define DEBUG_MAITREPOULEPOULE
+//#define DEBUG_MAITREPOULEPOULE
 
 class Carte;
 class Joueur;
