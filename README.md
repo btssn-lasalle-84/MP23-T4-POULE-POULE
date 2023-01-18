@@ -17,6 +17,7 @@ de bon, il faut reconstituer le film au plus vite !
 ## Historique des versions
 
 - [Version 1.0](https://github.com/btssn-lasalle84/MP23-T4/releases/tag/1.0) : 12/01/2023
+- [Version 1.1](https://github.com/btssn-lasalle84/MP23-T4/releases/tag/1.1) : 18/01/2023
 ## Recette
 
 |Fonctionnalités|oui|non|
