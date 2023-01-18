@@ -172,7 +172,7 @@ void MaitrePoulePoule::creePaquetCartes()
     cartesOeuf   = creeCartesOeuf();
     cartesPoule  = creeCartesPoule();
     cartesRenard = creeCartesRenard();
-    cartesCoq    = creeCartesCOQ();
+    cartesCoq    = creeCartesCoq();
 
     paquetCartes.insert(paquetCartes.end(),
                         cartesOeuf.begin(),
