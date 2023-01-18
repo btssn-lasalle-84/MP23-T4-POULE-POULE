@@ -7,6 +7,11 @@
 
 //#define DEBUG_MAITREPOULEPOULE
 
+// Choix de menu
+#define JOUE_PARTIE 1
+#define REGLES      2
+#define QUITTE_JEU  3
+
 class Carte;
 class Joueur;
 class IHM;
