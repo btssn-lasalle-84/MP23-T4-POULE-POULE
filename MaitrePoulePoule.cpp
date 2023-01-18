@@ -162,17 +162,30 @@ std::vector<Carte> MaitrePoulePoule::creeCartesCoq()
     return cartes;
 }
 
+std::vector<Carte> MaitrePoulePoule::creeCartesCanard()
+{
+    std::vector<Carte> cartes;
+    for(int i = 0; i < NB_CARTES_CANARD; i++)
+    {
+        cartes.emplace_back(Carte::ValeurCarte::Canard);
+    }
+    return cartes;
+}
+
 void MaitrePoulePoule::creePaquetCartes()
 {
     std::vector<Carte> cartesOeuf;
     std::vector<Carte> cartesPoule;
     std::vector<Carte> cartesRenard;
     std::vector<Carte> cartesCoq;
+    std::vector<Carte> cartesCanard;
+    std::vector<Carte> cartesVerDeTerre;
 
     cartesOeuf   = creeCartesOeuf();
     cartesPoule  = creeCartesPoule();
     cartesRenard = creeCartesRenard();
     cartesCoq    = creeCartesCoq();
+    cartesCanard = creeCartesCanard();
 
     paquetCartes.insert(paquetCartes.end(),
                         cartesOeuf.begin(),
@@ -184,6 +197,9 @@ void MaitrePoulePoule::creePaquetCartes()
                         cartesRenard.begin(),
                         cartesRenard.end());
     paquetCartes.insert(paquetCartes.end(), cartesCoq.begin(), cartesCoq.end());
+    paquetCartes.insert(paquetCartes.end(),
+                        cartesCanard.begin(),
+                        cartesCanard.end());
 }
 
 void MaitrePoulePoule::melangePaquet()
@@ -214,6 +230,8 @@ void MaitrePoulePoule::compteNbOeufs(const Carte& carte)
             }
             break;
         case Carte::ValeurCarte::Coq:
+            break;
+        case Carte::ValeurCarte::Canard:
             break;
         default:
             break;
