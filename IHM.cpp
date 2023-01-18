@@ -2,7 +2,6 @@
 #include "Carte.h"
 #include "Joueur.h"
 #include "MaitrePoulePoule.h"
-
 #include <iostream>
 #include <unistd.h>
 
