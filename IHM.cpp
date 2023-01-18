@@ -182,7 +182,7 @@ void IHM::afficheCarte(const Carte& carte) const
             |________________________________________|
                                             )" << '\n';
             break;
-             case Carte::ValeurCarte::Canard:
+        case Carte::ValeurCarte::Canard:
             std::cout << R"(
              ________________________________________
             |                                        |
@@ -204,6 +204,29 @@ void IHM::afficheCarte(const Carte& carte) const
             |                                        |
             |                                        |
             |________________________________________|
+                                            )" << '\n';
+        case Carte::ValeurCarte::VerDeTerre:
+            std::cout << R"(
+             ________________________________________
+            |                                        |
+            |                  .--.                  |
+            |                 /  oo                  |
+            |                /\_\_/                  |
+            |               /\___/                   |
+            |              ,`.__/                    |
+            |              7___/                     |
+            |              |___|                     |
+            |              |___|                     |
+            |               \___\_                   |
+            |                \___\_                  |
+            |                 \___\                  |
+            |                  \___\                 |
+            |                   \___\_               |
+            |                    `.__\_              |
+            |                      `._\              |
+            |                         `\             |
+            |                                        |
+            |________________________________________| 
                                             )" << '\n';
             break;
         default:
