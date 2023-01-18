@@ -1,6 +1,7 @@
 #include "IHM.h"
 #include "Carte.h"
 #include "Joueur.h"
+#include "MaitrePoulePoule.h"
 #include <iostream>
 #include <unistd.h>
 
@@ -39,9 +40,12 @@ void IHM::afficheMessageBienvenue() const
 void IHM::afficheMenu(std::string nomJoueur) const
 {
     std::cout << "Que voulez-vous faire " << nomJoueur << " ?" << std::endl;
-    std::cout << "[1] Commencer une partie" << std::endl;
-    std::cout << "[2] Règles du jeu" << std::endl;
-    std::cout << "[3] Quitter le jeu" << std::endl;
+    std::cout << "[" << MaitrePoulePoule::ChoixMenu::JouePartie
+              << "] Commencer une partie" << std::endl;
+    std::cout << "[" << MaitrePoulePoule::ChoixMenu::Regles << "] Règles du jeu"
+              << std::endl;
+    std::cout << "[" << MaitrePoulePoule::ChoixMenu::QuitteJeu
+              << "] Quitter le jeu" << std::endl;
 }
 
 void IHM::afficheRegles() const
@@ -226,7 +230,7 @@ void IHM::afficheCarte(const Carte& carte) const
             |                      `._\              |
             |                         `\             |
             |                                        |
-            |________________________________________| 
+            |________________________________________|
                                             )" << '\n';
             break;
         default:

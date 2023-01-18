@@ -277,15 +277,15 @@ bool MaitrePoulePoule::gereChoix(unsigned int choix)
 {
     switch(choix)
     {
-        case JOUE_PARTIE:
+        case ChoixMenu::JouePartie:
             monIHM->effaceEcran();
             monIHM->afficheMessageDebutPartie();
             derouleFilm();
             break;
-        case REGLES:
+        case ChoixMenu::Regles:
             monIHM->afficheRegles();
             break;
-        case QUITTE_JEU:
+        case ChoixMenu::QuitteJeu:
             monIHM->quitteJeu();
             return true;
         default:
