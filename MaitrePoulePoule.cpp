@@ -34,6 +34,7 @@ MaitrePoulePoule::~MaitrePoulePoule()
 
 void MaitrePoulePoule::jouePartie()
 {
+    monIHM->effaceEcran();
     monIHM->afficheMessageBienvenue();
 
     std::string nomJoueur = monIHM->entreNomJoueur();
