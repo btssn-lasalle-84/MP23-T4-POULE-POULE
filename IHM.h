@@ -24,9 +24,9 @@ class IHM
     void afficheCarte(const Carte& carte) const;
     void afficheMessageDebutPartie() const;
 
-    void filmFini();
-    void partieGagnee(std::string nomJoueur);
-    void partiePerdue(std::string nomJoueur, unsigned int compteurOeufs);
+    void finiFilm() const;
+    void gagnePartie(std::string nomJoueur) const;
+    void perdPartie(std::string nomJoueur, unsigned int compteurOeufs) const;
 
     void effaceEcran() const;
     void temporiseAffichageCourt() const;

@@ -88,16 +88,16 @@ void MaitrePoulePoule::derouleFilm()
     reinitialiseCompteurs();
     distribueCartes();
 
-    monIHM->filmFini();
+    monIHM->finiFilm();
     unsigned int reponseNbOeuf = monIHM->entreReponseNbOeufs();
     monJoueur->setReponseNbOeuf(reponseNbOeuf);
     if(verifieReponseJoueur())
     {
-        monIHM->partieGagnee(monJoueur->getNomJoueur());
+        monIHM->gagnePartie(monJoueur->getNomJoueur());
     }
     else
     {
-        monIHM->partiePerdue(monJoueur->getNomJoueur(), getCompteurOeufs());
+        monIHM->perdPartie(monJoueur->getNomJoueur(), getCompteurOeufs());
     }
 }
 

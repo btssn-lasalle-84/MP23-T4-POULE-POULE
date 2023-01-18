@@ -216,7 +216,7 @@ void IHM::afficheMessageDebutPartie() const
     std::cout << "La partie va débuter...";
 }
 
-void IHM::filmFini()
+void IHM::finiFilm() const
 {
     temporiseAffichageMoyen();
     effaceEcran();
@@ -225,14 +225,14 @@ void IHM::filmFini()
     std::cout << "Saisissez le nombre d'oeufs que vous pensez avoir compté : ";
 }
 
-void IHM::partieGagnee(std::string nomJoueur)
+void IHM::gagnePartie(std::string nomJoueur) const
 {
     std::cout << "Bravo " << nomJoueur << " ! Vous avez gagné la manche !"
               << std::endl
               << std::endl;
 }
 
-void IHM::partiePerdue(std::string nomJoueur, unsigned int compteurOeufs)
+void IHM::perdPartie(std::string nomJoueur, unsigned int compteurOeufs) const
 {
     std::cout << "Dommage " << nomJoueur << " tu as perdu ... " << std::endl;
     std::cout << "Le nombre d'oeuf(s) était de ";
