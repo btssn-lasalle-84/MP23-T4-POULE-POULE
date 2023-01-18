@@ -205,6 +205,7 @@ void IHM::afficheCarte(const Carte& carte) const
             |                                        |
             |________________________________________|
                                             )" << '\n';
+            break;
         case Carte::ValeurCarte::VerDeTerre:
             std::cout << R"(
              ________________________________________
