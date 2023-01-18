@@ -1,7 +1,6 @@
 #include "IHM.h"
 #include "Carte.h"
 #include "Joueur.h"
-
 #include <iostream>
 #include <unistd.h>
 
