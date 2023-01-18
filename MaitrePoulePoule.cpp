@@ -110,7 +110,7 @@ void MaitrePoulePoule::distribueCartes()
         !estPartieFinie(paquetCartes[numeroCarte]);
         numeroCarte++)
     {
-        monIHM->afficheCarte(paquetCartes[numeroCarte + 1]);
+        monIHM->afficheCarte(paquetCartes[numeroCarte + 1], numeroCarte);
         compteNbOeufs(paquetCartes[numeroCarte + 1]);
 #ifdef DEBUG_MAITREPOULEPOULE
         std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] "

@@ -84,9 +84,11 @@ void IHM::afficheRegles() const
     std::cout << "Bonne chance !" << std::endl << std::endl;
 }
 
-void IHM::afficheCarte(const Carte& carte) const
+void IHM::afficheCarte(const Carte& carte, const unsigned int numeroCarte) const
 {
     temporiseCarte();
+    effaceEcran();
+    std::cout << "Carte numero " << numeroCarte + 1 << std::endl;
     switch(carte.getValeurCarte())
     {
         case Carte::ValeurCarte::Oeuf:
@@ -240,7 +242,7 @@ void IHM::afficheCarte(const Carte& carte) const
 
 void IHM::afficheMessageDebutPartie() const
 {
-    std::cout << "La partie va débuter...";
+    std::cout << "La partie va débuter..." << std::endl;
 }
 
 void IHM::finiFilm() const
