@@ -10,7 +10,7 @@ std::string IHM::entreNomJoueur() const
     std::cout << "Pour commencer, veuillez entrer votre prénom : ";
     std::string nomJoueur;
     std::cin >> nomJoueur;
-    temporiseAffichage();
+    temporiseAffichageCourt();
     effaceEcran();
     return nomJoueur;
 }
@@ -30,12 +30,19 @@ unsigned int IHM::entreReponseNbOeufs() const
     return reponseNbOeuf;
 }
 
+void IHM::afficheMessageBienvenue() const
+{
+    std::cout << "Bienvenue sur la version 1.1 du jeu du Poule-Poule !"
+              << std::endl
+              << std::endl;
+}
+
 void IHM::afficheMenu(std::string nomJoueur) const
 {
-    std::cout << "Bienvenue " << nomJoueur << " sur le jeu du Poule-Poule !"
-              << std::endl;
+    std::cout << "Que voulez-vous faire " << nomJoueur << " ?" << std::endl;
     std::cout << "[1] Commencer une partie" << std::endl;
     std::cout << "[2] Règles du jeu" << std::endl;
+    std::cout << "[3] Quitter le jeu" << std::endl;
 }
 
 void IHM::afficheRegles() const
@@ -63,12 +70,11 @@ void IHM::afficheRegles() const
                  "partie."
               << std::endl
               << std::endl;
-
-    std::cout << "Appuyez sur [1] pour lancer la partie." << std::endl;
 }
 
 void IHM::afficheCarte(const Carte& carte) const
 {
+    temporiseCarte();
     switch(carte.getValeurCarte())
     {
         case Carte::ValeurCarte::Oeuf:
@@ -94,7 +100,6 @@ void IHM::afficheCarte(const Carte& carte) const
             |                                        |
             |________________________________________|
                                             )" << '\n';
-            temporiseCarte();
             break;
         case Carte::ValeurCarte::Poule:
             std::cout << R"(
@@ -119,7 +124,6 @@ void IHM::afficheCarte(const Carte& carte) const
             |                  '                     |
             |________________________________________|
                                             )" << '\n';
-            temporiseCarte();
             break;
         case Carte::ValeurCarte::Renard:
             std::cout << R"(
@@ -144,7 +148,6 @@ void IHM::afficheCarte(const Carte& carte) const
             |           `-../____,..---'`            |
             |________________________________________|
                                             )" << '\n';
-            temporiseCarte();
             break;
         case Carte::ValeurCarte::Coq:
             std::cout << R"(
@@ -169,7 +172,6 @@ void IHM::afficheCarte(const Carte& carte) const
             |         ~` ~"'                         |
             |________________________________________|
                                             )" << '\n';
-            temporiseCarte();
             break;
         default:
             break;
@@ -183,16 +185,17 @@ void IHM::afficheMessageDebutPartie() const
 
 void IHM::filmFini()
 {
-    temporiseAffichage();
+    temporiseAffichageMoyen();
     effaceEcran();
 
     std::cout << "Manche finie !" << std::endl;
-    std::cout << "Saisissez le nombre d'oeufs que vous pensez avoir compter : ";
+    std::cout << "Saisissez le nombre d'oeufs que vous pensez avoir compté : ";
 }
 
 void IHM::partieGagnee(std::string nomJoueur)
 {
     std::cout << "Bravo " << nomJoueur << " ! Vous avez gagné la manche !"
+              << std::endl
               << std::endl;
 }
 
@@ -200,7 +203,7 @@ void IHM::partiePerdue(std::string nomJoueur, unsigned int compteurOeufs)
 {
     std::cout << "Dommage " << nomJoueur << " tu as perdu ... " << std::endl;
     std::cout << "Le nombre d'oeuf(s) était de ";
-    std::cout << compteurOeufs << std::endl;
+    std::cout << compteurOeufs << std::endl << std::endl;
 }
 
 void IHM::effaceEcran() const
@@ -213,7 +216,16 @@ void IHM::temporiseCarte() const
     sleep(TEMPS_DISTRIBUTION_CARTE);
 }
 
-void IHM::temporiseAffichage() const
+void IHM::temporiseAffichageCourt() const
+{
+    sleep(1);
+}
+
+void IHM::temporiseAffichageMoyen() const
 {
     sleep(2);
+}
+
+void IHM::quitteJeu() const
+{
 }
