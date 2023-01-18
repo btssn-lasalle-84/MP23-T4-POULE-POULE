@@ -152,7 +152,7 @@ std::vector<Carte> MaitrePoulePoule::creeCartesRenard()
     return cartes;
 }
 
-std::vector<Carte> MaitrePoulePoule::creeCartesCOQ()
+std::vector<Carte> MaitrePoulePoule::creeCartesCoq()
 {
     std::vector<Carte> cartes;
     for(int i = 0; i < NB_CARTES_COQ; i++)
