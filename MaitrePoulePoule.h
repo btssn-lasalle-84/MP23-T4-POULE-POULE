@@ -5,7 +5,7 @@
 #include <vector>
 #include "Carte.h"
 
-#define DEBUG_MAITREPOULEPOULE
+//#define DEBUG_MAITREPOULEPOULE
 
 // Choix de menu
 #define JOUE_PARTIE 1
