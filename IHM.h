@@ -4,7 +4,9 @@
 #include "Carte.h"
 #include <string>
 
-#define TEMPS_DISTRIBUTION_CARTE 2
+#define TEMPS_DISTRIBUTION_CARTE  2
+#define TEMPORISE_AFFICHAGE_COURT 1
+#define TEMPORISE_AFFICHAGE_MOYEN 2
 
 class MaitrePoulePoule;
 
@@ -21,12 +23,12 @@ class IHM
     void afficheMessageBienvenue() const;
     void afficheMenu(std::string nomJoueur) const;
     void afficheRegles() const;
-    void afficheCarte(const Carte& carte) const;
+    void afficheCarte(const Carte& carte, const unsigned int numeroCarte) const;
     void afficheMessageDebutPartie() const;
 
-    void filmFini();
-    void partieGagnee(std::string nomJoueur);
-    void partiePerdue(std::string nomJoueur, unsigned int compteurOeufs);
+    void finiFilm() const;
+    void gagnePartie(std::string nomJoueur) const;
+    void perdPartie(std::string nomJoueur, unsigned int compteurOeufs) const;
 
     void effaceEcran() const;
     void temporiseAffichageCourt() const;

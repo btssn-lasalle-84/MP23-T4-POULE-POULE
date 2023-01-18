@@ -44,6 +44,13 @@ class MaitrePoulePoule
     bool               gereChoix(unsigned int choix);
 
   public:
+    enum ChoixMenu
+    {
+        Indefini,
+        JouePartie,
+        Regles,
+        QuitteJeu,
+    };
     MaitrePoulePoule();
     ~MaitrePoulePoule();
     void         jouePartie();
