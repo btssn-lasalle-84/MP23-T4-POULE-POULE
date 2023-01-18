@@ -18,22 +18,24 @@ de bon, il faut reconstituer le film au plus vite !
 
 - [Version 1.0](https://github.com/btssn-lasalle84/MP23-T4/releases/tag/1.0) : 12/01/2023
 - [Version 1.1](https://github.com/btssn-lasalle84/MP23-T4/releases/tag/1.1) : 18/01/2023
+- [Version 1.2](https://github.com/btssn-lasalle84/MP23-T4/releases/tag/1.2) : 18/01/2023
+- [Version 2.0](https://github.com/btssn-lasalle84/MP23-T4/releases/tag/2.0) : 19/01/2023
 ## Recette
 
-|Fonctionnalités|oui|non|
+|Fonctionnalités 1.0|oui|non|
 |---|:-:|---|
 |Saisir le nom du joueur|✅|
 |Créer un paquet de carte et le mélanger|✅|
 |Jouer une manche simple|✅|
 |Afficher le déroulement d'une manche|✅|
 
+|Fonctionnalités 2.0|oui|non|
+|---|:-:|---|
+|Jouer une partie composée de plusieurs manches|✅|
+|Afficher le déroulement d'une partie|✅|
+|Intégré de nouveaux acteurs|✅|
+
 ## TODO
-
-Dans la version 2.0, il sera possible en plus de :
-
-🟥 Jouer une partie composée de plusieurs manches.  
-🟥 Afficher le déroulement d'une partie.  
-🟥 Intégrer de nouveaux acteurs.  
 
 Dans la version 3.0, il sera possible en plus de :
 
