@@ -251,12 +251,12 @@ void IHM::temporiseCarte() const
 
 void IHM::temporiseAffichageCourt() const
 {
-    sleep(1);
+    sleep(TEMPORISE_AFFICHAGE_COURT);
 }
 
 void IHM::temporiseAffichageMoyen() const
 {
-    sleep(2);
+    sleep(TEMPORISE_AFFICHAGE_MOYEN);
 }
 
 void IHM::quitteJeu() const
