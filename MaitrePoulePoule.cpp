@@ -269,14 +269,7 @@ void MaitrePoulePoule::compteNbOeufs(const Carte& carte)
 
 bool MaitrePoulePoule::verifieReponseJoueur() const
 {
-    if(monJoueur->getReponseNbOeuf() == compteurOeufs)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return (monJoueur->getReponseNbOeuf() == compteurOeufs);
 }
 
 bool MaitrePoulePoule::gereChoix(unsigned int choix)
