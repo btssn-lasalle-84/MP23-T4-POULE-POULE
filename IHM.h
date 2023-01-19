@@ -7,6 +7,7 @@
 #define TEMPS_DISTRIBUTION_CARTE  2
 #define TEMPORISE_AFFICHAGE_COURT 1
 #define TEMPORISE_AFFICHAGE_MOYEN 2
+#define TEMPORISE_AFFICHAGE_LONG  4
 
 class MaitrePoulePoule;
 
@@ -24,16 +25,18 @@ class IHM
     void afficheMenu(std::string nomJoueur) const;
     void afficheRegles() const;
     void afficheCarte(const Carte& carte, const unsigned int numeroCarte) const;
-    void afficheMessageDebutPartie() const;
+    void afficheMessageDebutManche() const;
+    void afficheMessageFinPartie(unsigned int nbPointsJoueur) const;
 
-    void finiFilm() const;
+    void finitFilm() const;
     void gagnePartie(std::string nomJoueur) const;
     void perdPartie(std::string nomJoueur, unsigned int compteurOeufs) const;
 
     void effaceEcran() const;
+    void temporiseCarte() const;
     void temporiseAffichageCourt() const;
     void temporiseAffichageMoyen() const;
-    void temporiseCarte() const;
+    void temporiseAffichageLong() const;
     void quitteJeu() const;
 };
 
