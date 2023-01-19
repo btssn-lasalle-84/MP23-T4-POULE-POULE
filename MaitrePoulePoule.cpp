@@ -14,7 +14,7 @@
 
 MaitrePoulePoule::MaitrePoulePoule() :
     monJoueur(new Joueur), monIHM(new IHM), nbPointsJoueur(0), compteurOeufs(0),
-    compteurOeufsCouves(0), compteurVersDeTerre(0)
+    compteurOeufsCouves(0), compteurVersDeTerre(0), compteurOeufsAutruche(0)
 {
     creePaquetCartes();
 #ifdef DEBUG_MAITREPOULEPOULE
@@ -84,9 +84,10 @@ unsigned int MaitrePoulePoule::getNbPointsJoueur() const
 
 void MaitrePoulePoule::reinitialiseCompteurs()
 {
-    compteurOeufs       = 0;
-    compteurOeufsCouves = 0;
-    compteurVersDeTerre = 0;
+    compteurOeufs         = 0;
+    compteurOeufsCouves   = 0;
+    compteurVersDeTerre   = 0;
+    compteurOeufsAutruche = 0;
 }
 
 void MaitrePoulePoule::reinitialiseNbPointsJoueur()
@@ -100,6 +101,7 @@ void MaitrePoulePoule::derouleFilm()
     distribueCartes();
 
     monIHM->finitFilm();
+    convertitOeufAutrucheEnOeuf();
     unsigned int reponseNbOeuf = monIHM->entreReponseNbOeufs();
     monJoueur->setReponseNbOeuf(reponseNbOeuf);
     if(verifieReponseJoueur())
@@ -195,6 +197,16 @@ std::vector<Carte> MaitrePoulePoule::creeCartesVerDeTerre()
     return cartes;
 }
 
+std::vector<Carte> MaitrePoulePoule::creeCartesOeufAutruche()
+{
+    std::vector<Carte> cartes;
+    for(int i = 0; i < NB_CARTES_OEUF_AUTRUCHE; i++)
+    {
+        cartes.emplace_back(Carte::ValeurCarte::OeufAutruche);
+    }
+    return cartes;
+}
+
 void MaitrePoulePoule::creePaquetCartes()
 {
     std::vector<Carte> cartesOeuf;
@@ -203,13 +215,15 @@ void MaitrePoulePoule::creePaquetCartes()
     std::vector<Carte> cartesCoq;
     std::vector<Carte> cartesCanard;
     std::vector<Carte> cartesVerDeTerre;
+    std::vector<Carte> cartesOeufAutruche;
 
-    cartesOeuf       = creeCartesOeuf();
-    cartesPoule      = creeCartesPoule();
-    cartesRenard     = creeCartesRenard();
-    cartesCoq        = creeCartesCoq();
-    cartesCanard     = creeCartesCanard();
-    cartesVerDeTerre = creeCartesVerDeTerre();
+    cartesOeuf         = creeCartesOeuf();
+    cartesPoule        = creeCartesPoule();
+    cartesRenard       = creeCartesRenard();
+    cartesCoq          = creeCartesCoq();
+    cartesCanard       = creeCartesCanard();
+    cartesVerDeTerre   = creeCartesVerDeTerre();
+    cartesOeufAutruche = creeCartesOeufAutruche();
 
     paquetCartes.insert(paquetCartes.end(),
                         cartesOeuf.begin(),
@@ -227,6 +241,9 @@ void MaitrePoulePoule::creePaquetCartes()
     paquetCartes.insert(paquetCartes.end(),
                         cartesVerDeTerre.begin(),
                         cartesVerDeTerre.end());
+    paquetCartes.insert(paquetCartes.end(),
+                        cartesOeufAutruche.begin(),
+                        cartesOeufAutruche.end());
 }
 
 void MaitrePoulePoule::melangePaquet()
@@ -267,6 +284,8 @@ void MaitrePoulePoule::compteNbOeufs(const Carte& carte)
         case Carte::ValeurCarte::VerDeTerre:
             compteurVersDeTerre = compteurVersDeTerre + 1;
             break;
+        case Carte::ValeurCarte::OeufAutruche:
+            compteurOeufsAutruche = compteurOeufsAutruche + 1;
         default:
             break;
 #ifdef DEBUG_MAITREPOULEPOULE
@@ -280,6 +299,9 @@ void MaitrePoulePoule::compteNbOeufs(const Carte& carte)
               << std::endl;
     std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] "
               << "compteurOeufs = " << compteurOeufs << std::endl;
+    std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] "
+              << "compteurOeufsAutruche = " << compteurOeufsAutruche
+              << std::endl;
 #endif
 }
 
@@ -300,7 +322,7 @@ bool MaitrePoulePoule::gereChoix(unsigned int choix)
                 monIHM->effaceEcran();
                 monIHM->afficheMessageDebutManche();
                 derouleFilm();
-                nombreManches += 1;
+                nombreManches = nombreManches + 1;
             } while(nombreManches != NOMBRE_MANCHES);
             monIHM->afficheMessageFinPartie(getNbPointsJoueur());
             break;
@@ -314,4 +336,9 @@ bool MaitrePoulePoule::gereChoix(unsigned int choix)
             break;
     }
     return false;
+}
+
+void MaitrePoulePoule::convertitOeufAutrucheEnOeuf()
+{
+    compteurOeufs = compteurOeufs + (compteurOeufsAutruche * 2);
 }
