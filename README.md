@@ -20,6 +20,7 @@ de bon, il faut reconstituer le film au plus vite !
 - [Version 1.1](https://github.com/btssn-lasalle84/MP23-T4/releases/tag/1.1) : 18/01/2023
 - [Version 1.2](https://github.com/btssn-lasalle84/MP23-T4/releases/tag/1.2) : 18/01/2023
 - [Version 2.0](https://github.com/btssn-lasalle84/MP23-T4/releases/tag/2.0) : 19/01/2023
+- [Version 2.1](https://github.com/btssn-lasalle84/MP23-T4/releases/tag/2.1) : 19/01/2023
 ## Recette
 
 |Fonctionnalités 1.0|oui|non|
@@ -31,16 +32,21 @@ de bon, il faut reconstituer le film au plus vite !
 
 |Fonctionnalités 2.0|oui|non|
 |---|:-:|---|
-|Jouer une partie composée de plusieurs manches|✅|
+|Jouer une partie composée de plusieurs manches||:negative_squared_cross_mark:|
 |Afficher le déroulement d'une partie|✅|
 |Intégré de nouveaux acteurs|✅|
 
+Fonctionnalités 2.1|oui|non|
+|---|:-:|---|
+|Jouer une partie composée de plusieurs manches|✅|
+|Afficher le déroulement d'une partie|✅|
+|Intégré de nouveaux acteurs|✅|
 ## TODO
 
 Dans la version 3.0, il sera possible en plus de :
 
 🟥 Choisir un niveau de difficulté (durée d’affichage, nombre de cartes dans le paquet, ...).  
-🟥 Intégrer d’autres acteurs.  
+🟥 Intégrer d’autres acteurs.
 
 ## Ressources logicielles
 
