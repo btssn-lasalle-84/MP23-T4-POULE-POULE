@@ -207,6 +207,16 @@ std::vector<Carte> MaitrePoulePoule::creeCartesOeufAutruche()
     return cartes;
 }
 
+std::vector<Carte> MaitrePoulePoule::creeCartesFermier()
+{
+    std::vector<Carte> cartes;
+    for(int i = 0; i < NB_CARTES_FERMIER; i++)
+    {
+        cartes.emplace_back(Carte::ValeurCarte::Fermier);
+    }
+    return cartes;
+}
+
 void MaitrePoulePoule::creePaquetCartes()
 {
     std::vector<Carte> cartesOeuf;
@@ -216,6 +226,7 @@ void MaitrePoulePoule::creePaquetCartes()
     std::vector<Carte> cartesCanard;
     std::vector<Carte> cartesVerDeTerre;
     std::vector<Carte> cartesOeufAutruche;
+    std::vector<Carte> cartesFermier;
 
     cartesOeuf         = creeCartesOeuf();
     cartesPoule        = creeCartesPoule();
@@ -224,6 +235,7 @@ void MaitrePoulePoule::creePaquetCartes()
     cartesCanard       = creeCartesCanard();
     cartesVerDeTerre   = creeCartesVerDeTerre();
     cartesOeufAutruche = creeCartesOeufAutruche();
+    cartesFermier      = creeCartesFermier();
 
     paquetCartes.insert(paquetCartes.end(),
                         cartesOeuf.begin(),
@@ -244,6 +256,9 @@ void MaitrePoulePoule::creePaquetCartes()
     paquetCartes.insert(paquetCartes.end(),
                         cartesOeufAutruche.begin(),
                         cartesOeufAutruche.end());
+    paquetCartes.insert(paquetCartes.end(),
+                        cartesFermier.begin(),
+                        cartesFermier.end());
 }
 
 void MaitrePoulePoule::melangePaquet()
@@ -286,6 +301,11 @@ void MaitrePoulePoule::compteNbOeufs(const Carte& carte)
             break;
         case Carte::ValeurCarte::OeufAutruche:
             compteurOeufsAutruche = compteurOeufsAutruche + 1;
+            break;
+        case Carte::ValeurCarte::Fermier:
+            compteurOeufs         = 0;
+            compteurOeufsAutruche = 0;
+            break;
         default:
             break;
 #ifdef DEBUG_MAITREPOULEPOULE

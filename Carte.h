@@ -10,6 +10,7 @@
 #define NB_CARTES_CANARD        2
 #define NB_CARTES_VER_DE_TERRE  2
 #define NB_CARTES_OEUF_AUTRUCHE 2
+#define NB_CARTES_FERMIER       1
 
 class Carte
 {
@@ -23,6 +24,7 @@ class Carte
         Canard,
         VerDeTerre,
         OeufAutruche,
+        Fermier,
     };
     Carte();
     Carte(ValeurCarte valeurCarte);
