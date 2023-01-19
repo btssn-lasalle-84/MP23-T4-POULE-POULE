@@ -66,8 +66,9 @@ void IHM::afficheRegles() const
               << NB_CARTES_OEUF << " œufs, " << NB_CARTES_POULE << " Poules, "
               << NB_CARTES_RENARD << " Renards, " << NB_CARTES_CANARD
               << " Canards, " << NB_CARTES_VER_DE_TERRE << " Vers de terre, "
-              << NB_CARTES_OEUF_AUTRUCHE << "Oeufs d'autruche" << NB_CARTES_COQ
-              << " Coq." << std::endl;
+              << NB_CARTES_OEUF_AUTRUCHE << "Oeufs d'autruche, "
+              << NB_CARTES_FERMIER << " fermier et" << NB_CARTES_COQ << " Coq."
+              << std::endl;
     std::cout << "Il faut savoir qu'une Poule couve un oeuf arrivé à "
                  "n'importe "
                  "quel moment de la manche."
@@ -83,6 +84,9 @@ void IHM::afficheRegles() const
       << std::endl;
     std::cout << "L'oeuf d'autruche compte pour deux oeufs, mais vu sa taille, "
                  "il ne peut pas être couvé par une poule."
+              << std::endl;
+    std::cout << "Le fermier ramassera tous les oeufs disponibles, "
+                 "c'est-à-dire tous les oeufs sauf ceux couvés."
               << std::endl;
     std::cout << "Le Coq met fin à la manche et vous devrez donner le nombre "
                  "d'oeufs que vous pensez avoir compter."
@@ -266,6 +270,29 @@ void IHM::afficheCarte(const Carte& carte, const unsigned int numeroCarte) const
                                             )" << '\n';
             break;
         case Carte::ValeurCarte::Fermier:
+            std::cout << R"(
+             ________________________________________
+            |                                        |
+            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿   |
+            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿   |
+            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠹⠿⣿⣿⣿⣿⡟⣿⢧⣿⢻⣿⣿   |
+            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣏⣡⡄⠀⠀⠀⢰⣶⣶⣿⣿⡿⠁⠟⢸⠇⣼⣿⣿   |
+            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⠳⠀⠀⢀⣾⣿⣿⣿⣿⣷⣶⠀⢠⣀⣿⣿⣿   |
+            |   ⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⣀⠀⠀⠀⠀⠀⠉⠻⣿⣿⠟⠁⠀⣼⣿⣿⣿⣿   |
+            |   ⣿⣿⣿⣿⣿⣿⣟⠁⠀⢼⣿⠀⠀⠀⠀⠀⣦⡀⠈⠁⢀⠄⢸⣿⣿⣿⣿⣿   |
+            |   ⣿⣿⣿⣿⣿⣿⣿⣷⣤⡀⠉⠀⠀⠀⠀⢀⣿⣿⣶⣾⣿⠀⣾⣿⣿⣿⣿⣿   |
+            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⠀⠀⠀⠀⢸⣿⣿⣿⣿⡇⢰⣿⣿⣿⣿⣿⣿   |
+            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀⠀⠀⠀⠈⣿⣿⣿⣿⠁⣼⣿⣿⣿⣿⣿⣿   |
+            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⡄⠀⠀⢹⣿⣿⡏⢀⣿⣿⣿⣿⣿⣿⣿   |
+            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⢰⣿⠀⠀⠈⣿⣿⠃⢸⣿⣿⣿⣿⣿⣿⣿   |
+            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠀⠀⣾⣿⣇⠀⠀⢻⣿⠀⣿⣿⣿⣿⣿⣿⣿⣿   |
+            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⢠⣿⣿⣿⡀⠀⠘⡟⢰⣿⣿⣿⣿⣿⣿⣿⣿   |
+            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⠁⠀⣼⣿⣿⣿⣧⠀⠀⠁⣼⣿⣿⣿⣿⣿⣿⣿⣿   |
+            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣶⣿⣿⣿⣿⣿⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿   |
+            |                                        |
+            |________________________________________|
+                                            )" << '\n';
+            break;
         default:
             break;
     }
