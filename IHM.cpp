@@ -65,8 +65,9 @@ void IHM::afficheRegles() const
                  "composé de : "
               << NB_CARTES_OEUF << " œufs, " << NB_CARTES_POULE << " Poules, "
               << NB_CARTES_RENARD << " Renards, " << NB_CARTES_CANARD
-              << " Canards, " << NB_CARTES_VER_DE_TERRE << " Vers de terre et "
-              << NB_CARTES_COQ << " Coq." << std::endl;
+              << " Canards, " << NB_CARTES_VER_DE_TERRE << " Vers de terre, "
+              << NB_CARTES_OEUF_AUTRUCHE << "Oeufs d'autruche" << NB_CARTES_COQ
+              << " Coq." << std::endl;
     std::cout << "Il faut savoir qu'une Poule couve un oeuf arrivé à "
                  "n'importe "
                  "quel moment de la manche."
@@ -80,6 +81,9 @@ void IHM::afficheRegles() const
       << "Le Ver de terre attirera la prochaine poule, par conséquent elle "
          "ne couvrira pas d'oeufs."
       << std::endl;
+    std::cout << "L'oeuf d'autruche compte pour deux oeufs, mais vu sa taille, "
+                 "il ne peut pas être couvé par une poule."
+              << std::endl;
     std::cout << "Le Coq met fin à la manche et vous devrez donner le nombre "
                  "d'oeufs que vous pensez avoir compter."
               << std::endl;
@@ -97,22 +101,22 @@ void IHM::afficheCarte(const Carte& carte, const unsigned int numeroCarte) const
             std::cout << R"(
              ________________________________________
             |                                        |
+            |                                        |
+            |                                        |
+            |                                        |
+            |                                        |
+            |                  ████                  |
+            |                ██░░░░██                |
+            |              ██░░░░░░░░██              |
+            |              ██░░░░░░░░██              |
+            |            ██░░░░░░░░░░░░██            |
+            |            ██░░░░░░░░░░░░██            |
+            |            ██░░░░░░░░░░░░██            |
+            |              ██░░░░░░░░██              |
             |                ████████                |
-            |              ██        ██              |
-            |            ██▒▒▒▒        ██            |
-            |          ██▒▒▒▒▒▒      ▒▒▒▒██          |
-            |          ██▒▒▒▒▒▒      ▒▒▒▒██          |
-            |        ██  ▒▒▒▒        ▒▒▒▒▒▒██        |
-            |        ██                ▒▒▒▒██        |
-            |      ██▒▒      ▒▒▒▒▒▒          ██      |
-            |      ██      ▒▒▒▒▒▒▒▒▒▒        ██      |
-            |      ██      ▒▒▒▒▒▒▒▒▒▒    ▒▒▒▒██      |
-            |      ██▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒██      |
-            |        ██▒▒▒▒  ▒▒▒▒▒▒    ▒▒▒▒██        |
-            |        ██▒▒▒▒            ▒▒▒▒██        |
-            |          ██▒▒              ██          |
-            |            ████        ████            |
-            |                ████████                |
+            |                                        |
+            |                                        |
+            |                                        |
             |                                        |
             |________________________________________|
                                             )" << '\n';
@@ -237,6 +241,29 @@ void IHM::afficheCarte(const Carte& carte, const unsigned int numeroCarte) const
             |________________________________________|
                                             )" << '\n';
             break;
+        case Carte::ValeurCarte::OeufAutruche:
+            std::cout << R"(
+             ________________________________________
+            |                                        |
+            |                ████████                |
+            |              ██        ██              |
+            |            ██▒▒▒▒        ██            |
+            |          ██▒▒▒▒▒▒      ▒▒▒▒██          |
+            |          ██▒▒▒▒▒▒      ▒▒▒▒██          |
+            |        ██  ▒▒▒▒        ▒▒▒▒▒▒██        |
+            |        ██                ▒▒▒▒██        |
+            |      ██▒▒      ▒▒▒▒▒▒          ██      |
+            |      ██      ▒▒▒▒▒▒▒▒▒▒        ██      |
+            |      ██      ▒▒▒▒▒▒▒▒▒▒    ▒▒▒▒██      |
+            |      ██▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒██      |
+            |        ██▒▒▒▒  ▒▒▒▒▒▒    ▒▒▒▒██        |
+            |        ██▒▒▒▒            ▒▒▒▒██        |
+            |          ██▒▒              ██          |
+            |            ████        ████            |
+            |                ████████                |
+            |                                        |
+            |________________________________________|
+                                            )" << '\n';
         default:
             break;
     }
