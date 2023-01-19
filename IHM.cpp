@@ -264,6 +264,8 @@ void IHM::afficheCarte(const Carte& carte, const unsigned int numeroCarte) const
             |                                        |
             |________________________________________|
                                             )" << '\n';
+            break;
+        case Carte::ValeurCarte::Fermier:
         default:
             break;
     }

@@ -38,6 +38,7 @@ class MaitrePoulePoule
     std::vector<Carte> creeCartesCanard();
     std::vector<Carte> creeCartesVerDeTerre();
     std::vector<Carte> creeCartesOeufAutruche();
+    std::vector<Carte> creeCartesFermier();
     void               creePaquetCartes();
     void               melangePaquet();
     void               compteNbOeufs(const Carte& carte);
