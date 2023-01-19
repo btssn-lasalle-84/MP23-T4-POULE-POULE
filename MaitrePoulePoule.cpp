@@ -16,6 +16,7 @@ MaitrePoulePoule::MaitrePoulePoule() :
     monJoueur(new Joueur), monIHM(new IHM), nbPointsJoueur(0), compteurOeufs(0),
     compteurOeufsCouves(0), compteurVersDeTerre(0)
 {
+    creePaquetCartes();
 #ifdef DEBUG_MAITREPOULEPOULE
     std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] " << this
               << std::endl;
@@ -48,6 +49,7 @@ void MaitrePoulePoule::jouePartie()
     bool sortie = false;
     do
     {
+        reinitialiseNbPointsJoueur();
         monIHM->afficheMenu(monJoueur->getNomJoueur());
 
         unsigned int choixJoueur = monIHM->entreChoixJoueur();
@@ -75,32 +77,41 @@ void MaitrePoulePoule::setCompteurOeufs(unsigned int compteurOeufs)
     this->compteurOeufs = compteurOeufs;
 }
 
+unsigned int MaitrePoulePoule::getNbPointsJoueur() const
+{
+    return nbPointsJoueur;
+}
+
 void MaitrePoulePoule::reinitialiseCompteurs()
 {
-    nbPointsJoueur      = 0;
     compteurOeufs       = 0;
     compteurOeufsCouves = 0;
     compteurVersDeTerre = 0;
 }
 
+void MaitrePoulePoule::reinitialiseNbPointsJoueur()
+{
+    nbPointsJoueur = 0;
+}
+
 void MaitrePoulePoule::derouleFilm()
 {
-    creePaquetCartes();
-    melangePaquet();
     reinitialiseCompteurs();
     distribueCartes();
 
-    monIHM->finiFilm();
+    monIHM->finitFilm();
     unsigned int reponseNbOeuf = monIHM->entreReponseNbOeufs();
     monJoueur->setReponseNbOeuf(reponseNbOeuf);
     if(verifieReponseJoueur())
     {
         monIHM->gagnePartie(monJoueur->getNomJoueur());
+        nbPointsJoueur = nbPointsJoueur + 1;
     }
     else
     {
         monIHM->perdPartie(monJoueur->getNomJoueur(), getCompteurOeufs());
     }
+    monIHM->temporiseAffichageLong();
 }
 
 void MaitrePoulePoule::distribueCartes()
@@ -237,6 +248,10 @@ void MaitrePoulePoule::compteNbOeufs(const Carte& carte)
                 compteurOeufs       = compteurOeufs - 1;
                 compteurOeufsCouves = compteurOeufsCouves + 1;
             }
+            else
+            {
+                compteurVersDeTerre = compteurVersDeTerre - 1;
+            }
             break;
         case Carte::ValeurCarte::Renard:
             if(compteurOeufsCouves >= 1)
@@ -275,12 +290,19 @@ bool MaitrePoulePoule::verifieReponseJoueur() const
 
 bool MaitrePoulePoule::gereChoix(unsigned int choix)
 {
+    unsigned int nombreManches = 0;
     switch(choix)
     {
         case ChoixMenu::JouePartie:
-            monIHM->effaceEcran();
-            monIHM->afficheMessageDebutPartie();
-            derouleFilm();
+            do
+            {
+                melangePaquet();
+                monIHM->effaceEcran();
+                monIHM->afficheMessageDebutManche();
+                derouleFilm();
+                nombreManches += 1;
+            } while(nombreManches != NOMBRE_MANCHES);
+            monIHM->afficheMessageFinPartie(getNbPointsJoueur());
             break;
         case ChoixMenu::Regles:
             monIHM->afficheRegles();

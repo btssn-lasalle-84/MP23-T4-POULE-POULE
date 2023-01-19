@@ -10,7 +10,6 @@ std::string IHM::entreNomJoueur() const
     std::cout << "Pour commencer, veuillez entrer votre prénom : ";
     std::string nomJoueur;
     std::cin >> nomJoueur;
-    temporiseAffichageCourt();
     effaceEcran();
     return nomJoueur;
 }
@@ -32,8 +31,8 @@ unsigned int IHM::entreReponseNbOeufs() const
 
 void IHM::afficheMessageBienvenue() const
 {
-    std::cout << "Bienvenue sur la version 1.1 du jeu du Poule-Poule !"
-              << std::endl
+    std::cout << "Bienvenue sur la version " << NUMERO_VERSION
+              << " du jeu du Poule-Poule !" << std::endl
               << std::endl;
 }
 
@@ -51,34 +50,37 @@ void IHM::afficheMenu(std::string nomJoueur) const
 void IHM::afficheRegles() const
 {
     std::cout << "Voici les règles :" << std::endl;
-    std::cout << "Tout d’abord, l’ordinateur sera le réalisateur, le Maître "
-                 "Poule Poule (MPP)."
-              << std::endl;
+    std::cout << "Tout d’abord, une partie se composera de " << NOMBRE_MANCHES
+              << " manches." << std::endl;
+    std::cout
+      << "L’ordinateur sera le réalisateur, le Maître Poule Poule (MPP)."
+      << std::endl;
     std::cout << "Le MPP va afficher successivement les cartes, une "
                  "par une. Une "
                  "fois affichées, ces cartes composeront le Film."
               << std::endl;
-    std::cout
-      << "Pendant ce temps, le joueur devra juste compter les "
-         "œufs ! Pour "
-         "une première partie, le paquet de cartes sera "
-         "composé de : 15 "
-         "œufs, 10 Poules, 10 Renards, 2 canards, 2 vers de terre et 1 Coq."
-      << std::endl;
+    std::cout << "Pendant ce temps, le joueur devra juste compter les "
+                 "œufs ! Pour "
+                 "une première partie, le paquet de cartes sera "
+                 "composé de : "
+              << NB_CARTES_OEUF << " œufs, " << NB_CARTES_POULE << " Poules, "
+              << NB_CARTES_RENARD << " Renards, " << NB_CARTES_CANARD
+              << " Canards, " << NB_CARTES_VER_DE_TERRE << " Vers de terre et "
+              << NB_CARTES_COQ << " Coq." << std::endl;
     std::cout << "Il faut savoir qu'une Poule couve un oeuf arrivé à "
-                 "n' importe "
-                 "quel moment de la partie."
+                 "n'importe "
+                 "quel moment de la manche."
               << std::endl;
     std::cout << "Le Renard chasse une Poule arrivée à n'importe quel "
                  "moment de la "
-                 "partie."
+                 "manche."
               << std::endl;
     std::cout << "Le Canard n'est que de passage dans le film." << std::endl;
     std::cout
       << "Le Ver de terre attirera la prochaine poule, par conséquent elle "
          "ne couvrira pas d'oeufs."
       << std::endl;
-    std::cout << "Le Coq met fin à la partie et vous devrez donner le nombre "
+    std::cout << "Le Coq met fin à la manche et vous devrez donner le nombre "
                  "d'oeufs que vous pensez avoir compter."
               << std::endl;
     std::cout << "Bonne chance !" << std::endl << std::endl;
@@ -88,7 +90,7 @@ void IHM::afficheCarte(const Carte& carte, const unsigned int numeroCarte) const
 {
     temporiseCarte();
     effaceEcran();
-    std::cout << "Carte numero " << numeroCarte + 1 << std::endl;
+    std::cout << "Carte numéro " << numeroCarte + 1 << std::endl;
     switch(carte.getValeurCarte())
     {
         case Carte::ValeurCarte::Oeuf:
@@ -240,12 +242,19 @@ void IHM::afficheCarte(const Carte& carte, const unsigned int numeroCarte) const
     }
 }
 
-void IHM::afficheMessageDebutPartie() const
+void IHM::afficheMessageDebutManche() const
 {
-    std::cout << "La partie va débuter..." << std::endl;
+    std::cout << "La manche va débuter..." << std::endl;
 }
 
-void IHM::finiFilm() const
+void IHM::afficheMessageFinPartie(unsigned int nbPointsJoueur) const
+{
+    std::cout << "Vous avez gagné " << nbPointsJoueur << " manche(s) sur "
+              << NOMBRE_MANCHES << "." << std::endl
+              << std::endl;
+}
+
+void IHM::finitFilm() const
 {
     temporiseAffichageMoyen();
     effaceEcran();
@@ -286,6 +295,11 @@ void IHM::temporiseAffichageCourt() const
 void IHM::temporiseAffichageMoyen() const
 {
     sleep(TEMPORISE_AFFICHAGE_MOYEN);
+}
+
+void IHM::temporiseAffichageLong() const
+{
+    sleep(TEMPORISE_AFFICHAGE_LONG);
 }
 
 void IHM::quitteJeu() const
