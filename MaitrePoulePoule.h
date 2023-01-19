@@ -7,10 +7,8 @@
 
 //#define DEBUG_MAITREPOULEPOULE
 
-// Choix de menu
-#define JOUE_PARTIE 1
-#define REGLES      2
-#define QUITTE_JEU  3
+#define NUMERO_VERSION 2.1
+#define NOMBRE_MANCHES 3
 
 class Carte;
 class Joueur;
@@ -29,6 +27,7 @@ class MaitrePoulePoule
 
     void               derouleFilm();
     void               reinitialiseCompteurs();
+    void               reinitialiseNbPointsJoueur();
     void               distribueCartes();
     bool               estPartieFinie(const Carte& carte) const;
     std::vector<Carte> creeCartesOeuf();
@@ -56,6 +55,7 @@ class MaitrePoulePoule
     void         jouePartie();
     unsigned int getCompteurOeufs() const;
     void         setCompteurOeufs(unsigned int compteurOeufs);
+    unsigned int getNbPointsJoueur() const;
 };
 
-#endif
+#endif // MAITREPOULEPOULE_H
