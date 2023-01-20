@@ -40,7 +40,7 @@ void IHM::afficheMenu(std::string nomJoueur) const
 {
     std::cout << "Que voulez-vous faire " << nomJoueur << " ?" << std::endl;
     std::cout << "[" << MaitrePoulePoule::ChoixMenu::JouePartie
-              << "] Commencer une partie" << std::endl;
+              << "] Commencer une partie (3 manches)" << std::endl;
     std::cout << "[" << MaitrePoulePoule::ChoixMenu::Regles << "] Règles du jeu"
               << std::endl;
     std::cout << "[" << MaitrePoulePoule::ChoixMenu::QuitteJeu
@@ -98,7 +98,8 @@ void IHM::afficheCarte(const Carte& carte, const unsigned int numeroCarte) const
 {
     temporiseCarte();
     effaceEcran();
-    std::cout << "Carte numéro " << numeroCarte + 1 << std::endl;
+    std::cout << "                         Carte numéro " << numeroCarte + 1
+              << std::endl;
     switch(carte.getValeurCarte())
     {
         case Carte::ValeurCarte::Oeuf:
@@ -273,24 +274,8 @@ void IHM::afficheCarte(const Carte& carte, const unsigned int numeroCarte) const
             std::cout << R"(
              ________________________________________
             |                                        |
-            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿   |
-            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿   |
-            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠹⠿⣿⣿⣿⣿⡟⣿⢧⣿⢻⣿⣿   |
-            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣏⣡⡄⠀⠀⠀⢰⣶⣶⣿⣿⡿⠁⠟⢸⠇⣼⣿⣿   |
-            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⠳⠀⠀⢀⣾⣿⣿⣿⣿⣷⣶⠀⢠⣀⣿⣿⣿   |
-            |   ⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⣀⠀⠀⠀⠀⠀⠉⠻⣿⣿⠟⠁⠀⣼⣿⣿⣿⣿   |
-            |   ⣿⣿⣿⣿⣿⣿⣟⠁⠀⢼⣿⠀⠀⠀⠀⠀⣦⡀⠈⠁⢀⠄⢸⣿⣿⣿⣿⣿   |
-            |   ⣿⣿⣿⣿⣿⣿⣿⣷⣤⡀⠉⠀⠀⠀⠀⢀⣿⣿⣶⣾⣿⠀⣾⣿⣿⣿⣿⣿   |
-            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⠀⠀⠀⠀⢸⣿⣿⣿⣿⡇⢰⣿⣿⣿⣿⣿⣿   |
-            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀⠀⠀⠀⠈⣿⣿⣿⣿⠁⣼⣿⣿⣿⣿⣿⣿   |
-            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⡄⠀⠀⢹⣿⣿⡏⢀⣿⣿⣿⣿⣿⣿⣿   |
-            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⢰⣿⠀⠀⠈⣿⣿⠃⢸⣿⣿⣿⣿⣿⣿⣿   |
-            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠀⠀⣾⣿⣇⠀⠀⢻⣿⠀⣿⣿⣿⣿⣿⣿⣿⣿   |
-            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⢠⣿⣿⣿⡀⠀⠘⡟⢰⣿⣿⣿⣿⣿⣿⣿⣿   |
-            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⠁⠀⣼⣿⣿⣿⣧⠀⠀⠁⣼⣿⣿⣿⣿⣿⣿⣿⣿   |
-            |   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣶⣿⣿⣿⣿⣿⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿   |
-            |                                        |
-            |________________________________________|
+            |   
+
                                             )" << '\n';
             break;
         default:
@@ -298,9 +283,10 @@ void IHM::afficheCarte(const Carte& carte, const unsigned int numeroCarte) const
     }
 }
 
-void IHM::afficheMessageDebutManche() const
+void IHM::afficheMessageDebutManche(unsigned int numeroManche) const
 {
-    std::cout << "La manche va débuter..." << std::endl;
+    std::cout << "La manche va débuter... (" << numeroManche + 1 << "/"
+              << NOMBRE_MANCHES << ")" << std::endl;
 }
 
 void IHM::afficheMessageFinPartie(unsigned int nbPointsJoueur) const

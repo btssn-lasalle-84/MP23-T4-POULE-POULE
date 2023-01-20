@@ -332,7 +332,7 @@ bool MaitrePoulePoule::verifieReponseJoueur() const
 
 bool MaitrePoulePoule::gereChoix(unsigned int choix)
 {
-    unsigned int nombreManches = 0;
+    unsigned int numeroManche = 0;
     switch(choix)
     {
         case ChoixMenu::JouePartie:
@@ -340,10 +340,10 @@ bool MaitrePoulePoule::gereChoix(unsigned int choix)
             {
                 melangePaquet();
                 monIHM->effaceEcran();
-                monIHM->afficheMessageDebutManche();
+                monIHM->afficheMessageDebutManche(numeroManche);
                 derouleFilm();
-                nombreManches = nombreManches + 1;
-            } while(nombreManches != NOMBRE_MANCHES);
+                numeroManche = numeroManche + 1;
+            } while(numeroManche != NOMBRE_MANCHES);
             monIHM->afficheMessageFinPartie(getNbPointsJoueur());
             break;
         case ChoixMenu::Regles:
