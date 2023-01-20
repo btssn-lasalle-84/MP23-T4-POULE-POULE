@@ -66,7 +66,7 @@ void IHM::afficheRegles() const
               << NB_CARTES_OEUF << " œufs, " << NB_CARTES_POULE << " Poules, "
               << NB_CARTES_RENARD << " Renards, " << NB_CARTES_CANARD
               << " Canards, " << NB_CARTES_VER_DE_TERRE << " Vers de terre, "
-              << NB_CARTES_OEUF_AUTRUCHE << "Oeufs d'autruche, "
+              << NB_CARTES_OEUF_AUTRUCHE << " Oeufs d'autruche, "
               << NB_CARTES_FERMIER << " fermier et" << NB_CARTES_COQ << " Coq."
               << std::endl;
     std::cout << "Il faut savoir qu'une Poule couve un oeuf arrivé à "
