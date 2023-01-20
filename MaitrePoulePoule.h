@@ -5,7 +5,7 @@
 #include <vector>
 #include "Carte.h"
 
-#define DEBUG_MAITREPOULEPOULE
+//#define DEBUG_MAITREPOULEPOULE
 
 #define NUMERO_VERSION 2.1
 #define NOMBRE_MANCHES 3

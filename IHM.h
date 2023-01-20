@@ -25,7 +25,7 @@ class IHM
     void afficheMenu(std::string nomJoueur) const;
     void afficheRegles() const;
     void afficheCarte(const Carte& carte, const unsigned int numeroCarte) const;
-    void afficheMessageDebutManche() const;
+    void afficheMessageDebutManche(unsigned int numeroManche) const;
     void afficheMessageFinPartie(unsigned int nbPointsJoueur) const;
 
     void finitFilm() const;
