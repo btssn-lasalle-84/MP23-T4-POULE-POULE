@@ -7,7 +7,7 @@
 
 //#define DEBUG_MAITREPOULEPOULE
 
-#define NUMERO_VERSION 2.1
+#define NUMERO_VERSION 3.0
 #define NOMBRE_MANCHES 3
 
 class Carte;
@@ -24,11 +24,12 @@ class MaitrePoulePoule
     unsigned int       compteurOeufs;
     unsigned int       compteurOeufsCouves;
     unsigned int       compteurVersDeTerre;
+    unsigned int       compteurOeufsAutruche;
 
     void               derouleFilm();
     void               reinitialiseCompteurs();
     void               reinitialiseNbPointsJoueur();
-    void               distribueCartes();
+    void               distribueCartes(unsigned int choixDifficulte);
     bool               estPartieFinie(const Carte& carte) const;
     std::vector<Carte> creeCartesOeuf();
     std::vector<Carte> creeCartesPoule();
@@ -36,11 +37,15 @@ class MaitrePoulePoule
     std::vector<Carte> creeCartesCoq();
     std::vector<Carte> creeCartesCanard();
     std::vector<Carte> creeCartesVerDeTerre();
+    std::vector<Carte> creeCartesOeufAutruche();
+    std::vector<Carte> creeCartesFermier();
     void               creePaquetCartes();
     void               melangePaquet();
     void               compteNbOeufs(const Carte& carte);
+    void               convertitOeufAutrucheEnOeuf();
     bool               verifieReponseJoueur() const;
     bool               gereChoix(unsigned int choix);
+    void               recupereChoixDifficulte() const;
 
   public:
     enum ChoixMenu
@@ -56,6 +61,7 @@ class MaitrePoulePoule
     unsigned int getCompteurOeufs() const;
     void         setCompteurOeufs(unsigned int compteurOeufs);
     unsigned int getNbPointsJoueur() const;
+    void         gereChoixDifficulte(unsigned int choixDifficulte);
 };
 
 #endif // MAITREPOULEPOULE_H

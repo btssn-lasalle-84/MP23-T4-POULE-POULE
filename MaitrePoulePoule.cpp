@@ -14,7 +14,7 @@
 
 MaitrePoulePoule::MaitrePoulePoule() :
     monJoueur(new Joueur), monIHM(new IHM), nbPointsJoueur(0), compteurOeufs(0),
-    compteurOeufsCouves(0), compteurVersDeTerre(0)
+    compteurOeufsCouves(0), compteurVersDeTerre(0), compteurOeufsAutruche(0)
 {
     creePaquetCartes();
 #ifdef DEBUG_MAITREPOULEPOULE
@@ -84,9 +84,10 @@ unsigned int MaitrePoulePoule::getNbPointsJoueur() const
 
 void MaitrePoulePoule::reinitialiseCompteurs()
 {
-    compteurOeufs       = 0;
-    compteurOeufsCouves = 0;
-    compteurVersDeTerre = 0;
+    compteurOeufs         = 0;
+    compteurOeufsCouves   = 0;
+    compteurVersDeTerre   = 0;
+    compteurOeufsAutruche = 0;
 }
 
 void MaitrePoulePoule::reinitialiseNbPointsJoueur()
@@ -97,9 +98,10 @@ void MaitrePoulePoule::reinitialiseNbPointsJoueur()
 void MaitrePoulePoule::derouleFilm()
 {
     reinitialiseCompteurs();
-    distribueCartes();
+    distribueCartes(monJoueur->getChoixDifficulte());
 
     monIHM->finitFilm();
+    convertitOeufAutrucheEnOeuf();
     unsigned int reponseNbOeuf = monIHM->entreReponseNbOeufs();
     monJoueur->setReponseNbOeuf(reponseNbOeuf);
     if(verifieReponseJoueur())
@@ -114,14 +116,16 @@ void MaitrePoulePoule::derouleFilm()
     monIHM->temporiseAffichageLong();
 }
 
-void MaitrePoulePoule::distribueCartes()
+void MaitrePoulePoule::distribueCartes(unsigned int choixDifficulte)
 {
     for(unsigned int numeroCarte = 0;
         numeroCarte < paquetCartes.size() &&
         !estPartieFinie(paquetCartes[numeroCarte]);
         numeroCarte++)
     {
-        monIHM->afficheCarte(paquetCartes[numeroCarte + 1], numeroCarte);
+        monIHM->afficheCarte(paquetCartes[numeroCarte + 1],
+                             numeroCarte,
+                             choixDifficulte);
         compteNbOeufs(paquetCartes[numeroCarte + 1]);
 #ifdef DEBUG_MAITREPOULEPOULE
         std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] "
@@ -195,6 +199,26 @@ std::vector<Carte> MaitrePoulePoule::creeCartesVerDeTerre()
     return cartes;
 }
 
+std::vector<Carte> MaitrePoulePoule::creeCartesOeufAutruche()
+{
+    std::vector<Carte> cartes;
+    for(int i = 0; i < NB_CARTES_OEUF_AUTRUCHE; i++)
+    {
+        cartes.emplace_back(Carte::ValeurCarte::OeufAutruche);
+    }
+    return cartes;
+}
+
+std::vector<Carte> MaitrePoulePoule::creeCartesFermier()
+{
+    std::vector<Carte> cartes;
+    for(int i = 0; i < NB_CARTES_FERMIER; i++)
+    {
+        cartes.emplace_back(Carte::ValeurCarte::Fermier);
+    }
+    return cartes;
+}
+
 void MaitrePoulePoule::creePaquetCartes()
 {
     std::vector<Carte> cartesOeuf;
@@ -203,13 +227,17 @@ void MaitrePoulePoule::creePaquetCartes()
     std::vector<Carte> cartesCoq;
     std::vector<Carte> cartesCanard;
     std::vector<Carte> cartesVerDeTerre;
+    std::vector<Carte> cartesOeufAutruche;
+    std::vector<Carte> cartesFermier;
 
-    cartesOeuf       = creeCartesOeuf();
-    cartesPoule      = creeCartesPoule();
-    cartesRenard     = creeCartesRenard();
-    cartesCoq        = creeCartesCoq();
-    cartesCanard     = creeCartesCanard();
-    cartesVerDeTerre = creeCartesVerDeTerre();
+    cartesOeuf         = creeCartesOeuf();
+    cartesPoule        = creeCartesPoule();
+    cartesRenard       = creeCartesRenard();
+    cartesCoq          = creeCartesCoq();
+    cartesCanard       = creeCartesCanard();
+    cartesVerDeTerre   = creeCartesVerDeTerre();
+    cartesOeufAutruche = creeCartesOeufAutruche();
+    cartesFermier      = creeCartesFermier();
 
     paquetCartes.insert(paquetCartes.end(),
                         cartesOeuf.begin(),
@@ -227,6 +255,12 @@ void MaitrePoulePoule::creePaquetCartes()
     paquetCartes.insert(paquetCartes.end(),
                         cartesVerDeTerre.begin(),
                         cartesVerDeTerre.end());
+    paquetCartes.insert(paquetCartes.end(),
+                        cartesOeufAutruche.begin(),
+                        cartesOeufAutruche.end());
+    paquetCartes.insert(paquetCartes.end(),
+                        cartesFermier.begin(),
+                        cartesFermier.end());
 }
 
 void MaitrePoulePoule::melangePaquet()
@@ -267,6 +301,13 @@ void MaitrePoulePoule::compteNbOeufs(const Carte& carte)
         case Carte::ValeurCarte::VerDeTerre:
             compteurVersDeTerre = compteurVersDeTerre + 1;
             break;
+        case Carte::ValeurCarte::OeufAutruche:
+            compteurOeufsAutruche = compteurOeufsAutruche + 1;
+            break;
+        case Carte::ValeurCarte::Fermier:
+            compteurOeufs         = 0;
+            compteurOeufsAutruche = 0;
+            break;
         default:
             break;
 #ifdef DEBUG_MAITREPOULEPOULE
@@ -280,7 +321,15 @@ void MaitrePoulePoule::compteNbOeufs(const Carte& carte)
               << std::endl;
     std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] "
               << "compteurOeufs = " << compteurOeufs << std::endl;
+    std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] "
+              << "compteurOeufsAutruche = " << compteurOeufsAutruche
+              << std::endl;
 #endif
+}
+
+void MaitrePoulePoule::convertitOeufAutrucheEnOeuf()
+{
+    compteurOeufs = compteurOeufs + (compteurOeufsAutruche * 2);
 }
 
 bool MaitrePoulePoule::verifieReponseJoueur() const
@@ -290,18 +339,20 @@ bool MaitrePoulePoule::verifieReponseJoueur() const
 
 bool MaitrePoulePoule::gereChoix(unsigned int choix)
 {
-    unsigned int nombreManches = 0;
+    unsigned int numeroManche = 0;
     switch(choix)
     {
         case ChoixMenu::JouePartie:
+            monIHM->afficheMenuNiveauxDifficultes(monJoueur->getNomJoueur());
+            recupereChoixDifficulte();
             do
             {
                 melangePaquet();
                 monIHM->effaceEcran();
-                monIHM->afficheMessageDebutManche();
+                monIHM->afficheMessageDebutManche(numeroManche);
                 derouleFilm();
-                nombreManches += 1;
-            } while(nombreManches != NOMBRE_MANCHES);
+                numeroManche = numeroManche + 1;
+            } while(numeroManche != NOMBRE_MANCHES);
             monIHM->afficheMessageFinPartie(getNbPointsJoueur());
             break;
         case ChoixMenu::Regles:
@@ -314,4 +365,10 @@ bool MaitrePoulePoule::gereChoix(unsigned int choix)
             break;
     }
     return false;
+}
+
+void MaitrePoulePoule::recupereChoixDifficulte() const
+{
+    unsigned int choixDifficulte = monIHM->entreChoixDifficulte();
+    monJoueur->setChoixDifficulte(choixDifficulte);
 }

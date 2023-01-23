@@ -29,6 +29,14 @@ unsigned int IHM::entreReponseNbOeufs() const
     return reponseNbOeuf;
 }
 
+unsigned int IHM::entreChoixDifficulte() const
+{
+    std::cout << "Entrez votre réponse : ";
+    unsigned int choixDifficulte;
+    std::cin >> choixDifficulte;
+    return choixDifficulte;
+}
+
 void IHM::afficheMessageBienvenue() const
 {
     std::cout << "Bienvenue sur la version " << NUMERO_VERSION
@@ -40,11 +48,26 @@ void IHM::afficheMenu(std::string nomJoueur) const
 {
     std::cout << "Que voulez-vous faire " << nomJoueur << " ?" << std::endl;
     std::cout << "[" << MaitrePoulePoule::ChoixMenu::JouePartie
-              << "] Commencer une partie" << std::endl;
+              << "] Commencer une partie (3 manches)" << std::endl;
     std::cout << "[" << MaitrePoulePoule::ChoixMenu::Regles << "] Règles du jeu"
               << std::endl;
     std::cout << "[" << MaitrePoulePoule::ChoixMenu::QuitteJeu
               << "] Quitter le jeu" << std::endl;
+}
+
+void IHM::afficheMenuNiveauxDifficultes(std::string nomJoueur) const
+{
+    std::cout << "Très bien " << nomJoueur
+              << ", à présent, choisissez un niveau de difficulé" << std::endl;
+    std::cout << "[" << TEMPS_DISTRIBUTION_CARTE_RAPIDE
+              << "] Niveau Difficile (temps d'affichage carte : "
+              << TEMPS_DISTRIBUTION_CARTE_RAPIDE << "s)" << std::endl;
+    std::cout << "[" << TEMPS_DISTRIBUTION_CARTE_MOYEN
+              << "] Niveau Intermédiaire (temps d'affichage carte : "
+              << TEMPS_DISTRIBUTION_CARTE_MOYEN << "s)" << std::endl;
+    std::cout << "[" << TEMPS_DISTRIBUTION_CARTE_LENT
+              << "] Niveau Facile (temps d'affichage carte : "
+              << TEMPS_DISTRIBUTION_CARTE_LENT << "s)" << std::endl;
 }
 
 void IHM::afficheRegles() const
@@ -65,8 +88,10 @@ void IHM::afficheRegles() const
                  "composé de : "
               << NB_CARTES_OEUF << " œufs, " << NB_CARTES_POULE << " Poules, "
               << NB_CARTES_RENARD << " Renards, " << NB_CARTES_CANARD
-              << " Canards, " << NB_CARTES_VER_DE_TERRE << " Vers de terre et "
-              << NB_CARTES_COQ << " Coq." << std::endl;
+              << " Canards, " << NB_CARTES_VER_DE_TERRE << " Vers de terre, "
+              << NB_CARTES_OEUF_AUTRUCHE << " Oeufs d'autruche, "
+              << NB_CARTES_FERMIER << " fermier et" << NB_CARTES_COQ << " Coq."
+              << std::endl;
     std::cout << "Il faut savoir qu'une Poule couve un oeuf arrivé à "
                  "n'importe "
                  "quel moment de la manche."
@@ -80,39 +105,62 @@ void IHM::afficheRegles() const
       << "Le Ver de terre attirera la prochaine poule, par conséquent elle "
          "ne couvrira pas d'oeufs."
       << std::endl;
+    std::cout << "L'oeuf d'autruche compte pour deux oeufs, mais vu sa taille, "
+                 "il ne peut pas être couvé par une poule."
+              << std::endl;
+    std::cout << "Le fermier ramassera tous les oeufs disponibles, "
+                 "c'est-à-dire tous les oeufs sauf ceux couvés."
+              << std::endl;
     std::cout << "Le Coq met fin à la manche et vous devrez donner le nombre "
                  "d'oeufs que vous pensez avoir compter."
               << std::endl;
     std::cout << "Bonne chance !" << std::endl << std::endl;
 }
 
-void IHM::afficheCarte(const Carte& carte, const unsigned int numeroCarte) const
+void IHM::afficheCarte(const Carte&       carte,
+                       const unsigned int numeroCarte,
+                       unsigned int       choixDifficulte) const
 {
-    temporiseCarte();
+    switch(choixDifficulte)
+    {
+        case TEMPS_DISTRIBUTION_CARTE_RAPIDE:
+            temporiseCarteRapide();
+            break;
+        case TEMPS_DISTRIBUTION_CARTE_MOYEN:
+            temporiseCarteMoyen();
+            break;
+        case TEMPS_DISTRIBUTION_CARTE_LENT:
+            temporiseCarteLent();
+            break;
+        default:
+            temporiseCarteParDefaut();
+            break;
+    }
     effaceEcran();
-    std::cout << "Carte numéro " << numeroCarte + 1 << std::endl;
+    std::cout << "                         Carte numéro " << numeroCarte + 1
+              << std::endl;
     switch(carte.getValeurCarte())
     {
         case Carte::ValeurCarte::Oeuf:
             std::cout << R"(
              ________________________________________
             |                                        |
+            |                                        |
+            |                                        |
+            |                                        |
+            |                                        |
+            |                  ████                  |
+            |                ██░░░░██                |
+            |              ██░░░░░░░░██              |
+            |              ██░░░░░░░░██              |
+            |            ██░░░░░░░░░░░░██            |
+            |            ██░░░░░░░░░░░░██            |
+            |            ██░░░░░░░░░░░░██            |
+            |              ██░░░░░░░░██              |
             |                ████████                |
-            |              ██        ██              |
-            |            ██▒▒▒▒        ██            |
-            |          ██▒▒▒▒▒▒      ▒▒▒▒██          |
-            |          ██▒▒▒▒▒▒      ▒▒▒▒██          |
-            |        ██  ▒▒▒▒        ▒▒▒▒▒▒██        |
-            |        ██                ▒▒▒▒██        |
-            |      ██▒▒      ▒▒▒▒▒▒          ██      |
-            |      ██      ▒▒▒▒▒▒▒▒▒▒        ██      |
-            |      ██      ▒▒▒▒▒▒▒▒▒▒    ▒▒▒▒██      |
-            |      ██▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒██      |
-            |        ██▒▒▒▒  ▒▒▒▒▒▒    ▒▒▒▒██        |
-            |        ██▒▒▒▒            ▒▒▒▒██        |
-            |          ██▒▒              ██          |
-            |            ████        ████            |
-            |                ████████                |
+            |                                        |
+            |                                        |
+            |                                        |
             |                                        |
             |________________________________________|
                                             )" << '\n';
@@ -237,14 +285,62 @@ void IHM::afficheCarte(const Carte& carte, const unsigned int numeroCarte) const
             |________________________________________|
                                             )" << '\n';
             break;
+        case Carte::ValeurCarte::OeufAutruche:
+            std::cout << R"(
+             ________________________________________
+            |                                        |
+            |                ████████                |
+            |              ██        ██              |
+            |            ██▒▒▒▒        ██            |
+            |          ██▒▒▒▒▒▒      ▒▒▒▒██          |
+            |          ██▒▒▒▒▒▒      ▒▒▒▒██          |
+            |        ██  ▒▒▒▒        ▒▒▒▒▒▒██        |
+            |        ██                ▒▒▒▒██        |
+            |      ██▒▒      ▒▒▒▒▒▒          ██      |
+            |      ██      ▒▒▒▒▒▒▒▒▒▒        ██      |
+            |      ██      ▒▒▒▒▒▒▒▒▒▒    ▒▒▒▒██      |
+            |      ██▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒██      |
+            |        ██▒▒▒▒  ▒▒▒▒▒▒    ▒▒▒▒██        |
+            |        ██▒▒▒▒            ▒▒▒▒██        |
+            |          ██▒▒              ██          |
+            |            ████        ████            |
+            |                ████████                |
+            |                                        |
+            |________________________________________|
+                                            )" << '\n';
+            break;
+        case Carte::ValeurCarte::Fermier:
+            std::cout << R"(
+             ________________________________________
+            |                                        |
+            |                  _-_                   |
+            |               __(___)___               |
+            |                 ).' -(                 |
+            |                 )  _/                  |
+            |                .'_`(                   |
+            |               / ( ,/;                  |
+            |             /   \ ) \\.                |
+            |            /'-./ \ '.\\)               |
+            |            \   \  '---;\               |
+            |            |`\  \      \\              |
+            |           / / \  \      \\             |
+            |         _/ /   / /      _\\/           |
+            |        ( \/   /_/       \   |          |
+            |         \_)  (___)       '._/          |
+            |                                        |
+            |                                        |
+            |________________________________________|
+                                            )" << '\n';
+            break;
         default:
             break;
     }
 }
 
-void IHM::afficheMessageDebutManche() const
+void IHM::afficheMessageDebutManche(unsigned int numeroManche) const
 {
-    std::cout << "La manche va débuter..." << std::endl;
+    std::cout << "La manche va débuter... (" << numeroManche + 1 << "/"
+              << NOMBRE_MANCHES << ")" << std::endl;
 }
 
 void IHM::afficheMessageFinPartie(unsigned int nbPointsJoueur) const
@@ -282,9 +378,24 @@ void IHM::effaceEcran() const
     system("clear");
 }
 
-void IHM::temporiseCarte() const
+void IHM::temporiseCarteRapide() const
 {
-    sleep(TEMPS_DISTRIBUTION_CARTE);
+    sleep(TEMPS_DISTRIBUTION_CARTE_RAPIDE);
+}
+
+void IHM::temporiseCarteMoyen() const
+{
+    sleep(TEMPS_DISTRIBUTION_CARTE_MOYEN);
+}
+
+void IHM::temporiseCarteLent() const
+{
+    sleep(TEMPS_DISTRIBUTION_CARTE_LENT);
+}
+
+void IHM::temporiseCarteParDefaut() const
+{
+    sleep(TEMPS_DISTRIBUTION_CARTE_PAR_DEFAUT);
 }
 
 void IHM::temporiseAffichageCourt() const
