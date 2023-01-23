@@ -98,7 +98,7 @@ void MaitrePoulePoule::reinitialiseNbPointsJoueur()
 void MaitrePoulePoule::derouleFilm()
 {
     reinitialiseCompteurs();
-    distribueCartes();
+    distribueCartes(monJoueur->getChoixDifficulte());
 
     monIHM->finitFilm();
     convertitOeufAutrucheEnOeuf();
@@ -116,14 +116,16 @@ void MaitrePoulePoule::derouleFilm()
     monIHM->temporiseAffichageLong();
 }
 
-void MaitrePoulePoule::distribueCartes()
+void MaitrePoulePoule::distribueCartes(unsigned int choixDifficulte)
 {
     for(unsigned int numeroCarte = 0;
         numeroCarte < paquetCartes.size() &&
         !estPartieFinie(paquetCartes[numeroCarte]);
         numeroCarte++)
     {
-        monIHM->afficheCarte(paquetCartes[numeroCarte + 1], numeroCarte);
+        monIHM->afficheCarte(paquetCartes[numeroCarte + 1],
+                             numeroCarte,
+                             choixDifficulte);
         compteNbOeufs(paquetCartes[numeroCarte + 1]);
 #ifdef DEBUG_MAITREPOULEPOULE
         std::cout << "[" << __PRETTY_FUNCTION__ << ":" << __LINE__ << "] "
@@ -325,6 +327,11 @@ void MaitrePoulePoule::compteNbOeufs(const Carte& carte)
 #endif
 }
 
+void MaitrePoulePoule::convertitOeufAutrucheEnOeuf()
+{
+    compteurOeufs = compteurOeufs + (compteurOeufsAutruche * 2);
+}
+
 bool MaitrePoulePoule::verifieReponseJoueur() const
 {
     return (monJoueur->getReponseNbOeuf() == compteurOeufs);
@@ -336,6 +343,8 @@ bool MaitrePoulePoule::gereChoix(unsigned int choix)
     switch(choix)
     {
         case ChoixMenu::JouePartie:
+            monIHM->afficheMenuNiveauxDifficultes(monJoueur->getNomJoueur());
+            recupereChoixDifficulte();
             do
             {
                 melangePaquet();
@@ -358,7 +367,8 @@ bool MaitrePoulePoule::gereChoix(unsigned int choix)
     return false;
 }
 
-void MaitrePoulePoule::convertitOeufAutrucheEnOeuf()
+void MaitrePoulePoule::recupereChoixDifficulte() const
 {
-    compteurOeufs = compteurOeufs + (compteurOeufsAutruche * 2);
+    unsigned int choixDifficulte = monIHM->entreChoixDifficulte();
+    monJoueur->setChoixDifficulte(choixDifficulte);
 }

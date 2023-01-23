@@ -9,6 +9,7 @@ class Joueur
     std::string  nomJoueur;
     unsigned int choixJoueur;
     unsigned int reponseNbOeuf;
+    unsigned int choixDifficulte;
 
   public:
     Joueur();
@@ -21,6 +22,8 @@ class Joueur
     void         setChoixJoueur(unsigned int choixJoueur);
     unsigned int getReponseNbOeuf() const;
     void         setReponseNbOeuf(unsigned int reponseNbOeuf);
+    unsigned int getChoixDifficulte() const;
+    void         setChoixDifficulte(unsigned int choixDifficulte);
 };
 
 #endif // JOUEUR_H
