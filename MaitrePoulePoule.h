@@ -29,7 +29,7 @@ class MaitrePoulePoule
     void               derouleFilm();
     void               reinitialiseCompteurs();
     void               reinitialiseNbPointsJoueur();
-    void               distribueCartes();
+    void               distribueCartes(unsigned int choixDifficulte);
     bool               estPartieFinie(const Carte& carte) const;
     std::vector<Carte> creeCartesOeuf();
     std::vector<Carte> creeCartesPoule();
@@ -45,6 +45,7 @@ class MaitrePoulePoule
     void               convertitOeufAutrucheEnOeuf();
     bool               verifieReponseJoueur() const;
     bool               gereChoix(unsigned int choix);
+    void               recupereChoixDifficulte() const;
 
   public:
     enum ChoixMenu
@@ -60,6 +61,7 @@ class MaitrePoulePoule
     unsigned int getCompteurOeufs() const;
     void         setCompteurOeufs(unsigned int compteurOeufs);
     unsigned int getNbPointsJoueur() const;
+    void         gereChoixDifficulte(unsigned int choixDifficulte);
 };
 
 #endif // MAITREPOULEPOULE_H

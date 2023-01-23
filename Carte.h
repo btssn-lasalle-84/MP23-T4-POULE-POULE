@@ -35,4 +35,4 @@ class Carte
     ValeurCarte valeurCarte;
 };
 
-#endif
+#endif // CARTE_H

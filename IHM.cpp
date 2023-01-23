@@ -29,6 +29,14 @@ unsigned int IHM::entreReponseNbOeufs() const
     return reponseNbOeuf;
 }
 
+unsigned int IHM::entreChoixDifficulte() const
+{
+    std::cout << "Entrez votre réponse : ";
+    unsigned int choixDifficulte;
+    std::cin >> choixDifficulte;
+    return choixDifficulte;
+}
+
 void IHM::afficheMessageBienvenue() const
 {
     std::cout << "Bienvenue sur la version " << NUMERO_VERSION
@@ -45,6 +53,21 @@ void IHM::afficheMenu(std::string nomJoueur) const
               << std::endl;
     std::cout << "[" << MaitrePoulePoule::ChoixMenu::QuitteJeu
               << "] Quitter le jeu" << std::endl;
+}
+
+void IHM::afficheMenuNiveauxDifficultes(std::string nomJoueur) const
+{
+    std::cout << "Très bien " << nomJoueur
+              << ", à présent, choisissez un niveau de difficulé" << std::endl;
+    std::cout << "[" << TEMPS_DISTRIBUTION_CARTE_RAPIDE
+              << "] Niveau Difficile (temps d'affichage carte : "
+              << TEMPS_DISTRIBUTION_CARTE_RAPIDE << "s)" << std::endl;
+    std::cout << "[" << TEMPS_DISTRIBUTION_CARTE_MOYEN
+              << "] Niveau Intermédiaire (temps d'affichage carte : "
+              << TEMPS_DISTRIBUTION_CARTE_MOYEN << "s)" << std::endl;
+    std::cout << "[" << TEMPS_DISTRIBUTION_CARTE_LENT
+              << "] Niveau Facile (temps d'affichage carte : "
+              << TEMPS_DISTRIBUTION_CARTE_LENT << "s)" << std::endl;
 }
 
 void IHM::afficheRegles() const
@@ -94,9 +117,25 @@ void IHM::afficheRegles() const
     std::cout << "Bonne chance !" << std::endl << std::endl;
 }
 
-void IHM::afficheCarte(const Carte& carte, const unsigned int numeroCarte) const
+void IHM::afficheCarte(const Carte&       carte,
+                       const unsigned int numeroCarte,
+                       unsigned int       choixDifficulte) const
 {
-    temporiseCarte();
+    switch(choixDifficulte)
+    {
+        case TEMPS_DISTRIBUTION_CARTE_RAPIDE:
+            temporiseCarteRapide();
+            break;
+        case TEMPS_DISTRIBUTION_CARTE_MOYEN:
+            temporiseCarteMoyen();
+            break;
+        case TEMPS_DISTRIBUTION_CARTE_LENT:
+            temporiseCarteLent();
+            break;
+        default:
+            temporiseCarteParDefaut();
+            break;
+    }
     effaceEcran();
     std::cout << "                         Carte numéro " << numeroCarte + 1
               << std::endl;
@@ -339,9 +378,24 @@ void IHM::effaceEcran() const
     system("clear");
 }
 
-void IHM::temporiseCarte() const
+void IHM::temporiseCarteRapide() const
 {
-    sleep(TEMPS_DISTRIBUTION_CARTE);
+    sleep(TEMPS_DISTRIBUTION_CARTE_RAPIDE);
+}
+
+void IHM::temporiseCarteMoyen() const
+{
+    sleep(TEMPS_DISTRIBUTION_CARTE_MOYEN);
+}
+
+void IHM::temporiseCarteLent() const
+{
+    sleep(TEMPS_DISTRIBUTION_CARTE_LENT);
+}
+
+void IHM::temporiseCarteParDefaut() const
+{
+    sleep(TEMPS_DISTRIBUTION_CARTE_PAR_DEFAUT);
 }
 
 void IHM::temporiseAffichageCourt() const

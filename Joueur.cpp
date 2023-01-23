@@ -42,3 +42,13 @@ void Joueur::setReponseNbOeuf(unsigned int reponseNbOeuf)
 {
     this->reponseNbOeuf = reponseNbOeuf;
 }
+
+unsigned int Joueur::getChoixDifficulte() const
+{
+    return choixDifficulte;
+}
+
+void Joueur::setChoixDifficulte(unsigned int choixDifficulte)
+{
+    this->choixDifficulte = choixDifficulte;
+}
